@@ -1,28 +1,32 @@
 import * as React from 'react';
-import { StyleSheet, FlatList, VirtualizedList, Button, Alert } from 'react-native';
-
+import { StyleSheet, FlatList, VirtualizedList, Button, Alert, DynamicColorIOS } from 'react-native';
+import Card, { TitledCard, TransparentCard } from '../components/Card';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import AddChoreScreen from './AddChoreScreen'
 import { Checkbox } from 'react-native-paper';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { ScrollView } from 'react-native-gesture-handler';
+
 
 const getChoreCount = (data) => data.length;
-const Chore = ({ name, date , isPastDue, isDone }) => (
+const Chore = ({ name, date, isPastDue, isDone }) => (
   <View style={styles.item} lightColor="#eee" darkColor="#1D1D1D">
-      <View style={{flexDirection: 'row',justifyContent: 'space-between',}} lightColor="#eee" darkColor="#1D1D1D">
-    <View lightColor="#eee" darkColor="#1D1D1D">
-    <Text style={[styles.listItemTitle, {textDecorationLine: isDone ? "line-through" : "none"}]}>{name}</Text>
-    <Text style={{color: isPastDue ? "rgb(255,69,58)" : "white", textDecorationLine: isDone ? "line-through" : "none"}}>{date}</Text>
+    <View style={{ flexDirection: 'row', justifyContent: 'space-between', }} lightColor="#eee" darkColor="#1D1D1D">
+      <View lightColor="#eee" darkColor="#1D1D1D">
+        <Text style={[styles.listItemTitle, { textDecorationLine: isDone ? "line-through" : "none" }]}>{name}</Text>
+        <Text style={[isPastDue && { color: "rgb(255,69,58)" }, { textDecorationLine: isDone ? "line-through" : "none" }]}>{date}</Text>
+      </View>
+      <View lightColor="#eee" darkColor="#1D1D1D">
+        <Checkbox
+          status={isDone ? 'checked' : 'unchecked'}
+          onPress={() => { }}
+          disabled={false}
+          color={"rgba(255,150,51,1)"}
+        />
+      </View>
     </View>
-    <View lightColor="#eee" darkColor="#1D1D1D">
-    <Checkbox
-      status={isDone?'checked': 'unchecked'}
-      onPress={() => {}}
-      disabled={false}
-      color={"rgba(255,150,51,1)"}
-    />
-    </View>
-  </View>
   </View>
 );
 const getChore = (data, index) => ({
@@ -35,55 +39,64 @@ const getChore = (data, index) => ({
 
 
 export default function ChoresScreen() {
-  
+
   return (
     <View style={styles.container}>
 
-<View lightColor="#eee" darkColor="#1D1D1D" style={{borderRadius: 15, width: "90%", padding: 10, marginTop: 30}}>
- 
-        <Text style={[styles.subheader, {paddingLeft: 10}]}>House Chores</Text>
-        <View style={styles.separator} lightColor="lightgrey" darkColor="rgba(255,255,255,0.1)" />
-     <Text>7 Chores Left Today</Text>
-     <Text>1 Chore Completed Today </Text>
-     <Text>5% Completed</Text>
-        <View style={styles.separator} lightColor="lightgrey" darkColor="rgba(255,255,255,0.1)" />
-        <Button onPress={() => Alert.alert('Error!')} title="View House Chores"/>
-          
-      </View>
+      <LinearGradient
+        // Background Linear Gradient
+        colors={['rgba(252,212,166,1)', 'rgba(248,159,55,1)']}
+        style={[{ width: "100%", height: "100%" }, styles.container]}
+      >
+        <ScrollView style={[{ width: "100%", height: "100%" }]}>
+          <View style={styles.container}>
+
+            <TitledCard title="House Chores">
+              <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }} lightColor="#eee" darkColor="#1D1D1D">
+                <TransparentCard>
+                  <Text style={{ fontSize: 30, fontWeight: 'bold', textAlign: 'center' }}>5</Text>
+                  <Text>Chores Left</Text>
+                </TransparentCard>
+                <TransparentCard>
+                  <Text style={{ fontSize: 30, fontWeight: 'bold', textAlign: 'center' }}>5</Text>
+                  <Text>Completed</Text>
+                </TransparentCard>
+                <TransparentCard>
+                  <Text style={{ fontSize: 30, fontWeight: 'bold', textAlign: 'center' }}>50%</Text>
+                  <Text>Completed</Text>
+                </TransparentCard>
+              </View>
+              <View style={styles.separator} lightColor="lightgrey" darkColor="rgba(255,255,255,0.1)" />
+              <Button onPress={() => Alert.alert('Error!')} title="View House Chores" />
+            </TitledCard>
 
 
-        <View lightColor="#eee" darkColor="#1D1D1D" style={{borderRadius: 15, width: "90%", padding: 10, marginTop: 30, maxHeight: 500}}>
- 
-        <Text style={[styles.subheader, {paddingLeft: 10}]}>My Chores</Text>
-       
-        <View style={styles.separator} lightColor="lightgrey" darkColor="rgba(255,255,255,0.1)" />
-          <VirtualizedList
-          data={[
-            {name: "Get a new Frontend", date: "Today by 5:00 PM"},
-            {name: "Serve Dinner", date: "Today at 5:30 PM"},
-            {name: "Finish Roomy App", date: "Friday"},
-            {name: "Get a new Frontend", date: "Today by 5:00 PM"},
-            {name: "Serve Dinner", date: "Today at 5:30 PM"},
-            {name: "Finish Roomy App", date: "Friday"},
-            {name: "Get a new Frontend", date: "Today by 5:00 PM"},
-            {name: "This one is late!", date: "Today at 5:30 PM", isPastDue: true},
-            {name: "This one is finished!", date: "Friday", isDone: true},
-          ]}
-          getItemCount={getChoreCount}
-          getItem={getChore}
-          renderItem={({ item }) => <Chore name={item.name} date={item.date} isPastDue={item.isPastDue} isDone={item.isDone}/>}
-          />
-            <View style={styles.separator} lightColor="lightgrey" darkColor="rgba(255,255,255,0.1)" />
-        
-          <View style={{flexDirection: 'row',justifyContent: 'space-between',}} lightColor="#eee" darkColor="#1D1D1D">
-    
-    <Button onPress={() => Alert.alert('Error!')} title="Edit List"/>
-    <Button onPress={() => Alert.alert('Error!')} title="Add Chore"/>
-    </View>
-      </View>
- 
-     
-
+            <TitledCard title="My Chores" style={{ maxHeight: 500 }}>
+              <VirtualizedList
+                data={[
+                  { name: "Get a new Frontend", date: "Today by 5:00 PM" },
+                  { name: "Serve Dinner", date: "Today at 5:30 PM" },
+                  { name: "Finish Roomy App", date: "Friday" },
+                  { name: "Get a new Frontend", date: "Today by 5:00 PM" },
+                  { name: "Serve Dinner", date: "Today at 5:30 PM" },
+                  { name: "Finish Roomy App", date: "Friday" },
+                  { name: "Get a new Frontend", date: "Today by 5:00 PM" },
+                  { name: "This one is late!", date: "Today at 5:30 PM", isPastDue: true },
+                  { name: "This one is finished!", date: "Friday", isDone: true },
+                ]}
+                getItemCount={getChoreCount}
+                getItem={getChore}
+                renderItem={({ item }) => <Chore name={item.name} date={item.date} isPastDue={item.isPastDue} isDone={item.isDone} />}
+              />
+              <View style={styles.separator} lightColor="lightgrey" darkColor="rgba(255,255,255,0.1)" />
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', }} lightColor="#eee" darkColor="#1D1D1D">
+                <Button onPress={() => Alert.alert('Error!')} title="Edit List" />
+                <Button onPress={() => Alert.alert('Error!')} title="Add Chore" />
+              </View>
+            </TitledCard>
+          </View>
+        </ScrollView>
+      </LinearGradient>
 
     </View>
   );
@@ -98,9 +111,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: "linear-gradient(0deg, rgba(255,150,51,1) 0%, rgba(255,128,5,0.4) 100%)"
-   // paddingTop: 30
-   // justifyContent: 'center',
+    backgroundColor: "transparent"
+    // paddingTop: 30
+    // justifyContent: 'center',
   },
   title: {
     fontSize: 25,

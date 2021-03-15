@@ -36,7 +36,7 @@ const getChore = (data, index) => ({
 });
 
 
-export default function ChoresScreen() {
+export default function AddChoreScreen() {
   
   return (
     <View style={styles.container}>
