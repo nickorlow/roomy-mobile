@@ -94,10 +94,11 @@ export default function ChoresScreen() {
                 <Button onPress={() => Alert.alert('Error!')} title="Add Chore" />
               </View>
             </TitledCard>
+
+            
           </View>
         </ScrollView>
       </LinearGradient>
-
     </View>
   );
 }

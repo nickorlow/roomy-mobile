@@ -26,6 +26,7 @@ export default function BottomTabNavigator() {
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color}/>,
         }}
+      
       />
       <BottomTab.Screen
         name="Chores"
