@@ -15,3 +15,12 @@ export type TabOneParamList = {
 export type TabTwoParamList = {
   TabTwoScreen: undefined;
 };
+
+export type HomeParamList = {
+  HomeParamList: undefined;
+};
+
+export type ChoreParamList = {
+  ChoreParamList: undefined;
+};
+
