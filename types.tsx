@@ -20,6 +20,11 @@ export type HomeParamList = {
   HomeParamList: undefined;
 };
 
+export type WelcomeParamList = {
+  WelcomeParamList: undefined;
+};
+
+
 export type ChoreParamList = {
   ChoreParamList: undefined;
 };

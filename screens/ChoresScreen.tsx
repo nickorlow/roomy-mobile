@@ -1,24 +1,25 @@
 import * as React from 'react';
 import { StyleSheet, FlatList, VirtualizedList, Button, Alert, DynamicColorIOS } from 'react-native';
-import Card, { TitledCard, TransparentCard } from '../components/Card';
+import Card, { TitledCard, TransparentCard, LongTitledCard } from '../components/Card';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import AddChoreScreen from './AddChoreScreen'
 import { Checkbox } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import Colors from '../constants/Colors';
 import { ScrollView } from 'react-native-gesture-handler';
 
+import useColorScheme from '../hooks/useColorScheme';
 
 const getChoreCount = (data) => data.length;
 const Chore = ({ name, date, isPastDue, isDone }) => (
-  <View style={styles.item} lightColor="#eee" darkColor="#1D1D1D">
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between', }} lightColor="#eee" darkColor="#1D1D1D">
-      <View lightColor="#eee" darkColor="#1D1D1D">
+  <View style={[styles.item, { backgroundColor: 'transparent'}]} >
+    <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'transparent' }} >
+      <View style={{ backgroundColor: 'transparent'}}>
         <Text style={[styles.listItemTitle, { textDecorationLine: isDone ? "line-through" : "none" }]}>{name}</Text>
         <Text style={[isPastDue && { color: "rgb(255,69,58)" }, { textDecorationLine: isDone ? "line-through" : "none" }]}>{date}</Text>
       </View>
-      <View lightColor="#eee" darkColor="#1D1D1D">
+      <View style={{ backgroundColor: 'transparent'}}>
         <Checkbox
           status={isDone ? 'checked' : 'unchecked'}
           onPress={() => { }}
@@ -40,6 +41,7 @@ const getChore = (data, index) => ({
 
 export default function ChoresScreen() {
 
+  const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
   return (
     <View style={styles.container}>
 
@@ -51,8 +53,8 @@ export default function ChoresScreen() {
         <ScrollView style={[{ width: "100%", height: "100%" }]}>
           <View style={styles.container}>
 
-            <TitledCard title="House Chores">
-              <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }} lightColor="#eee" darkColor="#1D1D1D">
+            <LongTitledCard title="House Chores"  color={adColors.cardColor} titleColor={adColors.text}>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', backgroundColor: 'transparent' }} >
                 <TransparentCard>
                   <Text style={{ fontSize: 30, fontWeight: 'bold', textAlign: 'center' }}>5</Text>
                   <Text>Chores Left</Text>
@@ -68,10 +70,9 @@ export default function ChoresScreen() {
               </View>
               <View style={styles.separator} lightColor="lightgrey" darkColor="rgba(255,255,255,0.1)" />
               <Button onPress={() => Alert.alert('Error!')} title="View House Chores" />
-            </TitledCard>
+            </LongTitledCard>
 
-
-            <TitledCard title="My Chores" style={{ maxHeight: 500 }}>
+            <LongTitledCard title="My Chores" style={{ maxHeight: 500 }}  color={adColors.cardColor} titleColor={adColors.text}> 
               <VirtualizedList
                 data={[
                   { name: "Get a new Frontend", date: "Today by 5:00 PM" },
@@ -86,16 +87,17 @@ export default function ChoresScreen() {
                 ]}
                 getItemCount={getChoreCount}
                 getItem={getChore}
+
+                scrollEnabled={false}
                 renderItem={({ item }) => <Chore name={item.name} date={item.date} isPastDue={item.isPastDue} isDone={item.isDone} />}
               />
               <View style={styles.separator} lightColor="lightgrey" darkColor="rgba(255,255,255,0.1)" />
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', }} lightColor="#eee" darkColor="#1D1D1D">
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between',  backgroundColor: 'transparent'}}>
                 <Button onPress={() => Alert.alert('Error!')} title="Edit List" />
                 <Button onPress={() => Alert.alert('Error!')} title="Add Chore" />
               </View>
-            </TitledCard>
-
-            
+            </LongTitledCard>
+ 
           </View>
         </ScrollView>
       </LinearGradient>

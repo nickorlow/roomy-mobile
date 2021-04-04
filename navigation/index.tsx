@@ -3,8 +3,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import { ColorSchemeName } from 'react-native';
 import HomeScreen from '../screens/HomeScreen';
-import LoginScreen from '../screens/LoginScreen';
+import LoginScreen from '../screens/onboarding/LoginScreen';
 
+import NotificationScreen from '../screens/onboarding/NotificationScreen';
+import SubscriptionScreen from '../screens/onboarding/SubscriptionScreen';
+import LocationScreen from '../screens/onboarding/LocationScreen';
+
+import WelcomeScreen from '../screens/onboarding/WelcomeScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
@@ -28,8 +33,15 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false}} initialRouteName="Login">
-      <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Oops!' }} />
+    <Stack.Navigator screenOptions={{ headerShown: false}} initialRouteName="Welcome">
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name='Welcome' component={WelcomeScreen} />
+      <Stack.Screen name='Location' component={LocationScreen} />
+      <Stack.Screen name='Subscription' component={SubscriptionScreen} />
+
+      <Stack.Screen name='Notification' component={NotificationScreen} />
+
+
       <Stack.Screen name="Root" component={BottomTabNavigator} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
