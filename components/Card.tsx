@@ -9,7 +9,7 @@ import { Text, View } from './Themed';
 
 const Card = (props: { children: any, style?: StyleProp<ViewStyle>, color:any }) =>
 (
-  <View lightColor={props.color} darkColor={props.color} style={[props.style, { borderRadius: 15, padding: 10, paddingHorizontal: 20, marginTop: 30, marginHorizontal: 15 }]}>
+  <View lightColor={props.color} darkColor={props.color} style={[props.style, { borderRadius: 15, padding: 10, paddingHorizontal: 10, marginTop: 30, marginHorizontal: 15 }]}>
     {props.children}
   </View>
 );
@@ -26,8 +26,8 @@ export const LongTitledCard = (props: { children: any, style?: StyleProp<ViewSty
 (
   <LongCard color={props.color} style={props.style}>
    
-      <Text style={[styles.title, {marginBottom:RFValue(0), maxWidth: 250, color:props.titleColor}]}>{props.title}</Text> 
-      <View style={styles.separator} lightColor="lightgrey" darkColor="rgba(255,255,255,0.1)" />
+      <Text style={[styles.title, {maxWidth: 250, color:props.titleColor, }]}>{props.title}</Text> 
+   
     {props.children}
     
   </LongCard>
@@ -37,7 +37,7 @@ export const TitledCard = (props: { children: any, style?: StyleProp<ViewStyle>,
 (
   <Card color={props.color} style={props.style}>
    
-      <Text style={[styles.title, {marginBottom:RFValue(10), maxWidth: 250, color:props.titleColor}]}>{props.title}</Text> 
+      <Text style={[styles.title, {maxWidth: 250, color:props.titleColor}]}>{props.title}</Text> 
     {props.children}
     
   </Card>
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
   },
   title: {
-    fontSize: 22,
+    fontSize: 40,
     fontWeight: 'bold',
     color: 'white'
   },
