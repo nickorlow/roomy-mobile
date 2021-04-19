@@ -107,7 +107,7 @@ function ChoreNavigator() {
       <TabOneStack.Screen
         name="TabOneScreen"
         component={ChoresScreen}
-        options={{ headerTitle: 'Chores'}}
+        options={{ headerTitle: 'Chores', headerShown: false}}
       />
     </TabOneStack.Navigator>
   );
