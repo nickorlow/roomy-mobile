@@ -76,7 +76,7 @@ export default function HomeScreen() {
               />
             </LongTitledCard>
 
-            <LongTitledCard title="Grocerey List" color={adColors.cardColor} titleColor={adColors.text}>
+            <LongTitledCard title="Grocery List" color={adColors.cardColor} titleColor={adColors.text}>
               <VirtualizedList
                 data={[
                   { product: 'Eggs', req: "House" },

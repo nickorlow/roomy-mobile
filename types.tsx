@@ -24,8 +24,11 @@ export type WelcomeParamList = {
   WelcomeParamList: undefined;
 };
 
-
 export type ChoreParamList = {
   ChoreParamList: undefined;
+};
+
+export type GroceryParamList = {
+  GroceryParamList: undefined;
 };
 
