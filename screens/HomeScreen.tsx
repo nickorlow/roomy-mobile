@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { StyleSheet, FlatList, VirtualizedList, Button, Alert, ScrollView } from 'react-native';
+import { StyleSheet, FlatList, VirtualizedList, Button, Alert, ScrollView, TouchableOpacity } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
-import Card, { TitledCard, LongTitledCard, TransparentCard } from '../components/Card';
+import Card, { TitledCard, LongTitledCard, TransparentCard, LongCard } from '../components/Card';
 import { Text, View } from '../components/Themed';
 import { LinearGradient } from 'expo-linear-gradient';
 import Colors from '../constants/Colors';
@@ -19,7 +19,9 @@ const Item = ({ product, req }) => (
         <Text style={styles.listItemTitle}>{product.substring(0,24)+(product.length > 24 ? '...' : '')}</Text>
         <Text style={{fontWeight: 'bold', color: "grey"}}>{req}</Text>
       </TransparentCard>
+      <TouchableOpacity onPress={() => {Alert.alert('We should ask for a vote on this button press')}}>
       <Text style={{fontSize: RFValue(35)}}>{req == "For the whole Apartment" ? '🗳️': ''}</Text>
+      </TouchableOpacity>
     </View>
   </View>
 );
@@ -71,7 +73,16 @@ export default function HomeScreen() {
         <ScrollView style={[{ width: "100%", height: "100%" }]}>
           <View style={styles.container}>
 
-            <LongTitledCard title="Chores" color={adColors.cardColor} titleColor={adColors.text}>
+            <LongCard color={adColors.cardColor}>
+            <View style={{ flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'space-between'}} >
+              <TransparentCard>
+                <Text style={[styles.title, {maxWidth: 250, color:adColors.text }]}>Chores</Text> 
+              </TransparentCard>
+
+              <TouchableOpacity onPress={() => {Alert.alert('Not Implemented!')}}>
+                <Ionicons name="add-circle" color="#F59810" size={36}/>
+              </TouchableOpacity>
+              </View>
               <VirtualizedList
                 data={[
                   { name: "Get a new Frontend", date: "Yesterday at 5:00 PM", isLate: true, isDoneSoon: false, emoji: '📱'},
@@ -85,10 +96,18 @@ export default function HomeScreen() {
               />
 
 <Text style={{textAlign: 'center', color: "#F59810", fontWeight: 'bold', fontSize: 25}}>4 More This Week</Text>
-            </LongTitledCard>
+            </LongCard>
 
-            <LongTitledCard title="Groceries" color={adColors.cardColor} titleColor={adColors.text}>
-              <Text style={{paddingLeft: 5, color:"grey", fontWeight: 'bold'}}>Next grocery run: Saturday at 5:00 PM</Text>
+            <LongCard color={adColors.cardColor}>
+            <View style={{ flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'space-between'}} >
+              <TransparentCard>
+                <Text style={[styles.title, {maxWidth: 250, color:adColors.text }]}>Groceries</Text> 
+                <Text style={{paddingLeft: 5, color:"grey", fontWeight: 'bold'}}>Next grocery run: Saturday at 5:00 PM</Text>
+              </TransparentCard>   
+              <TouchableOpacity onPress={() => {Alert.alert('Not Implemented!')}}>
+                <Ionicons name="add-circle" color="#F59810" size={36}/>
+              </TouchableOpacity>
+              </View>
               <VirtualizedList
                 data={[
                   { product: 'Eggs', req: "For the whole Apartment" },
@@ -102,7 +121,7 @@ export default function HomeScreen() {
                 renderItem={({ item }) => <Item product={item.product} req={item.req} />}
               />
               <Text style={{textAlign: 'center', color: "#F59810", fontWeight: 'bold', fontSize: 25}}>4 More Items</Text>
-            </LongTitledCard>
+            </LongCard>
           </View>
         </ScrollView>
     </View>
