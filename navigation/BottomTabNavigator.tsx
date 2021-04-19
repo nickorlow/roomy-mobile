@@ -22,7 +22,7 @@ export default function BottomTabNavigator() {
       <BottomTab.Screen
         name="Home"
         component={HomeNavigator}
-        options={{
+        options={{ 
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color}/>,
         }}
       
@@ -41,14 +41,17 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="cart" color={color} />,
         }}
       />
-      <BottomTab.Screen
-        name="Rules"
-        component={TabTwoNavigator}
+     
+
+    <BottomTab.Screen
+        name="Car"
+        component={ChoreNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="car" color={color} />,
         }}
       />
-       <BottomTab.Screen
+
+<BottomTab.Screen
         name="Settings"
         component={TabTwoNavigator}
         options={{
@@ -90,7 +93,7 @@ function HomeNavigator() {
       <TabOneStack.Screen
         name="TabOneScreen"
         component={HomeScreen}
-        options={{ headerTitle: 'Home'}}
+        options={{ headerTitle: 'Home', headerShown: false}}
       />
     </TabOneStack.Navigator>
   );

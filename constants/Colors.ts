@@ -28,7 +28,7 @@ export default {
   },
   dark: {
     text: '#fff',
-    cardColor: "rgb(44,44,46)",
+    cardColor: "#1C1C1E",
     background: '#000',
     tint: tintColorDark,
     tabIconDefault: '#ccc',
