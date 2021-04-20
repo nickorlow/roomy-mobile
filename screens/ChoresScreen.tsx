@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, FlatList, TouchableOpacity, VirtualizedList, Button, Alert, DynamicColorIOS } from 'react-native';
 import Card, { TitledCard, TransparentCard, LongTitledCard, LongCard } from '../components/Card';
 import EditScreenInfo from '../components/EditScreenInfo';
@@ -49,15 +49,18 @@ const getChore = (data, index) => ({
 
 export default function ChoresScreen() {
 
+  const [isVisible, setVisible] = useState(false);
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
   return (
     <View style={styles.container}>
+      <AddChoreScreen isVisible={isVisible} close={() => setVisible(false)}/>
      <View style={[{minHeight: 200, backgroundColor:"#F59810", width: "100%", paddingTop:RFValue(50), paddingHorizontal: RFValue(10), paddingBottom: RFValue(10)}]}>
      <TransparentCard style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
        <TransparentCard>
         <Text style={[styles.title, {paddingBottom: RFValue(8)}]}>Chores</Text>
         <Text style={styles.subheader}>You have 5 chores left today.</Text>
         <Text style={styles.subheader}>1 Chore is late.</Text>
+        <Text style={styles.subheader}>1 Chore needs to be finished soon.</Text>
        </TransparentCard>
      </TransparentCard>
      </View>
@@ -70,7 +73,7 @@ export default function ChoresScreen() {
                 <Text style={[styles.title, {maxWidth: 250, color:adColors.text }]}>Your Chores</Text> 
               </TransparentCard>
 
-              <TouchableOpacity onPress={() => {Alert.alert('Not Implemented!')}}>
+              <TouchableOpacity onPress={() => {setVisible(true)}}>
                 <Ionicons name="add-circle" color="#F59810" size={36}/>
               </TouchableOpacity>
               </View>
