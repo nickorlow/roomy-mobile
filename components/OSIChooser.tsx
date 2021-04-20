@@ -11,7 +11,7 @@ export default function OSIChooser(props: { clickFunc: Function, item: string, i
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []);
   return(
-    <TouchableOpacity onPress={() => {props.clickFunc(props.item); forceUpdate(); }} style={{backgroundColor: props.items.indexOf(props.item)!=-1 ? 'rgba(200,200,200,.75)':'rgba(25,25,25,.05)',borderWidth: 1, borderColor: 'blue', borderRadius: 5, margin: 5, padding:2}}>
+    <TouchableOpacity onPress={() => {props.clickFunc(props.item); forceUpdate(); }} style={{backgroundColor: props.items.indexOf(props.item)!=-1 ? 'rgba(200,200,200,.75)':'transparent',borderWidth: 1 , borderColor: 'blue', borderRadius: 5, margin: 5, padding:2}}>
       <Text style={{fontSize: RFValue(16)}}>{props.item}</Text>
     </TouchableOpacity>
   );

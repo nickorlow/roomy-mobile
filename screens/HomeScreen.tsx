@@ -10,6 +10,9 @@ import useColorScheme from '../hooks/useColorScheme';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Ionicons } from '@expo/vector-icons';
 
+import ChoreItem from './ChoreListItem';
+import { getChores, getMyChores } from './Constants';
+
 const getItemCount = (data) => data.length;
 const Item = ({ product, req }) => (
   <View style={[styles.item, {backgroundColor: 'transparent'}]}>
@@ -32,19 +35,7 @@ const getItem = (data, index) => ({
 });
 
 const getChoreCount = (data) => data.length;
-const Chore = ({ name, date, isLate, isDoneSoon, emoji }) => (
-  
-  <View style={[styles.item, {backgroundColor: 'transparent', paddingLeft: 0}]}>
-    <View style={{ flexDirection: 'row', backgroundColor: 'transparent'}} lightColor="#eee" darkColor="#1D1D1D">
 
-    <Text style={{fontSize: RFValue(35)}}>{isLate ? '❗' :emoji}</Text>
-      <TransparentCard style={{paddingLeft: 5}}>
-        <Text style={[styles.listItemTitle, {color: isLate ? "red" : isDoneSoon ? "#F59810" : "black"}]}>{name}</Text>
-        <Text style={[{color: isLate ? "red" : isDoneSoon ? "#F59810" : "grey", fontWeight: 'bold'}]}>{date}</Text>
-      </TransparentCard>
-    </View>
-  </View>
-);
 const getChore = (data, index) => ({
   id: Math.random().toString(12).substring(0),
   name: data[index].name,
@@ -58,6 +49,12 @@ const getChore = (data, index) => ({
 export default function HomeScreen() {
 
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
+  const list = [];
+
+  for (var item of getMyChores().slice(0,3)) {
+    list.push(<ChoreItem chore={item} />);
+  }
+
   return (
     <View style={styles.container}>
      <View style={[{minHeight: 200, backgroundColor:"#F59810", width: "100%", paddingTop:RFValue(50), paddingHorizontal: RFValue(10), paddingBottom: RFValue(10)}]}>
@@ -83,17 +80,9 @@ export default function HomeScreen() {
                 <Ionicons name="add-circle" color="#F59810" size={36}/>
               </TouchableOpacity>
               </View>
-              <VirtualizedList
-                data={[
-                  { name: "Get a new Frontend", date: "Yesterday at 5:00 PM", isLate: true, isDoneSoon: false, emoji: '📱'},
-                  { name: "Serve Dinner", date: "Today at 5:30 PM", isLate: false, isDoneSoon: true , emoji: '🍔' },
-                  { name: "Finish Roomy App", date: "Friday", isLate: false, isDoneSoon: false , emoji: '📱' },
-                ]}
-                getItemCount={getChoreCount}
-                getItem={getChore}
-                scrollEnabled={false}
-                renderItem={({ item }) => <Chore name={item.name} date={item.date} isLate={item.isLate} isDoneSoon={item.isDoneSoon} emoji={item.emoji}/>}
-              />
+              
+            {list}
+              
 
 <Text style={{textAlign: 'center', color: "#F59810", fontWeight: 'bold', fontSize: 25}}>4 More This Week</Text>
             </LongCard>
