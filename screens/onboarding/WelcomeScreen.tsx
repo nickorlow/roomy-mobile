@@ -18,7 +18,7 @@ export default function WelcomeScreen({
     <View style={styles.container}>
       <View style={{ marginTop: RFValue(200), paddingBottom: RFValue(250), height: "100%" }}>
         <Text style={[styles.title, { color: adColors.text, textAlign: 'center', marginBottom: RFValue(30) }]}>Welcome to <Text style={{color: "#F59810"}}>Roomy</Text></Text>
-        <View style={{ justifyContent: 'center', flex: 1, height: "100%" }}>
+        <View style={{ justifyContent: 'center', flex: 1, height: "100%"}}>
           <FeatureCard title="Remember" content="Roomy remembers when to do the chores so you don't have to." icon="bookmarks" iconcolor={adColors.text} />
           <FeatureCard title="Communicate" content="Roomy lets you communicate with roomates in an effective manner to keep on the same page." icon="chatbubbles" iconcolor={adColors.text} />
           <FeatureCard title="Shop" content="Roomy makes shopping easier by allowing you to split shopping bills and have a shared shopping list." icon="cart" iconcolor={adColors.text} />

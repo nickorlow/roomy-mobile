@@ -7,8 +7,9 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import HomeScreen from '../screens/HomeScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList, HomeParamList, ChoreParamList } from '../types';
+import { BottomTabParamList, TabOneParamList, TabTwoParamList, HomeParamList, ChoreParamList, GroceryParamList } from '../types';
 import ChoresScreen from '../screens/ChoresScreen';
+import GroceryScreen from '../screens/GroceryScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -36,7 +37,7 @@ export default function BottomTabNavigator() {
       />
         <BottomTab.Screen
         name="Groceries"
-        component={TabTwoNavigator}
+        component={GroceryNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="cart" color={color} />,
         }}
@@ -124,5 +125,19 @@ function TabTwoNavigator() {
         options={{ headerTitle: 'Tab Two Title' }}
       />
     </TabTwoStack.Navigator>
+  );
+}
+
+const GroceryStack = createStackNavigator<GroceryParamList>();
+
+function GroceryNavigator() {
+  return (
+    <GroceryStack.Navigator>
+      <GroceryStack.Screen
+        name="GroceryScreen"
+        component={GroceryScreen}
+        options={{ headerTitle: 'Grocery', headerShown: false}}
+      />
+    </GroceryStack.Navigator>
   );
 }
