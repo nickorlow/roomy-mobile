@@ -14,8 +14,8 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
-import JoinCreateHouseScreen from '../screens/onboarding/JoinCreateHouseScreen';
-import JoinHouseScreen from '../screens/onboarding/JoinHouseScreen';
+//import JoinCreateHouseScreen from '../screens/onboarding/JoinCreateHouseScreen';
+//import JoinHouseScreen from '../screens/onboarding/JoinHouseScreen';
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
@@ -41,8 +41,6 @@ function RootNavigator() {
       <Stack.Screen name='Location' component={LocationScreen} />
       <Stack.Screen name='Subscription' component={SubscriptionScreen} />
       <Stack.Screen name='Notification' component={NotificationScreen} />
-      <Stack.Screen name='JoinCreateHouse' component={JoinCreateHouseScreen} />
-      <Stack.Screen name='JoinHouse' component={JoinHouseScreen} />
 
       <Stack.Screen name="Root" component={BottomTabNavigator} />
       

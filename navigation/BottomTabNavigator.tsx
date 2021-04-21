@@ -136,7 +136,7 @@ function GroceryNavigator() {
       <GroceryStack.Screen
         name="GroceryScreen"
         component={GroceryScreen}
-        options={{ headerTitle: 'Grocery' }}
+        options={{ headerTitle: 'Grocery', headerShown: false}}
       />
     </GroceryStack.Navigator>
   );

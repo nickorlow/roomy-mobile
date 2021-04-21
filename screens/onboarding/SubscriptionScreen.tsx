@@ -27,7 +27,7 @@ export default function SubscriptionScreen({
     }
     else
     {
-      navigation.replace('JoinCreateHouse')
+      navigation.replace('Root')
     }
   };
 
