@@ -10,6 +10,7 @@ import HomeScreen from '../screens/HomeScreen';
 import { BottomTabParamList, TabOneParamList, TabTwoParamList, HomeParamList, ChoreParamList, GroceryParamList } from '../types';
 import ChoresScreen from '../screens/ChoresScreen';
 import GroceryScreen from '../screens/GroceryScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -54,7 +55,7 @@ export default function BottomTabNavigator() {
 
 <BottomTab.Screen
         name="Settings"
-        component={TabTwoNavigator}
+        component={SettingNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="settings" color={color} />,
         }}
@@ -139,5 +140,19 @@ function GroceryNavigator() {
         options={{ headerTitle: 'Grocery', headerShown: false}}
       />
     </GroceryStack.Navigator>
+  );
+}
+
+const SettingsStack = createStackNavigator<GroceryParamList>();
+
+function SettingNavigator() {
+  return (
+    <SettingsStack.Navigator>
+      <SettingsStack.Screen
+        name="SettingScreen"
+        component={SettingsScreen}
+        options={{ headerTitle: 'Setting', headerShown: false}}
+      />
+    </SettingsStack.Navigator>
   );
 }

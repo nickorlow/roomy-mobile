@@ -55,15 +55,16 @@ export default function SettingsScreen({
       <TouchableOpacity onPress={() => { toggleBuyPremium(true) }}><View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'transparent' }}>
           <View>
-            <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>Location</Text>
-            <Text style={{color: adColors.text}}>Austin, Texas</Text>
+            <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>Houehold</Text>
+            <Text style={{color: adColors.text}}>Member of Casa de Federighi</Text>
           </View>
         </View></View>
         </TouchableOpacity>
       </Card>
+
       <View style={{marginTop:RFValue(10), alignItems: 'center', flex: 1}}>
-        <Text style={{color: adColors.text}}>ProtoNews (Prototype News App) v1.0</Text>
-        <Text style={{color: adColors.text}}>Copyright © Nicholas Orlowsky</Text>
+        <Text style={{color: adColors.text}}>Roomy (Codename: TBD) v1.0</Text>
+        <Text style={{color: adColors.text}}>Copyright © Orlow Software Inc</Text>
       </View>
     </View>
   );
@@ -90,6 +91,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "transparent",
     alignItems: 'center',
+    marginTop: 50
   },
   title: {
     fontSize: 35,
