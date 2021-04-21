@@ -9,8 +9,10 @@ import { Text, View } from './Themed';
 
 const EmojiButton = (props: { clickFunc: Function,currentEmoji: string, emoji: string}) =>
 (
-  <TouchableOpacity onPress={() => {props.clickFunc(props.emoji)}} style={{backgroundColor: props.emoji == props.currentEmoji ? 'rgba(200,200,200,.75)':'transparent', borderColor: 'black', borderRadius: 10, margin: 5}}>
-    <Text style={{fontSize: RFValue(40)}}>{props.emoji}</Text>
+  <TouchableOpacity onPress={() => {props.clickFunc(props.emoji)}} style={{backgroundColor:'transparent', borderColor: 'black', borderRadius: 10, margin: 5}} >
+    <View opacity={props.emoji == props.currentEmoji ? 1 : .2}>
+      <Text style={{fontSize: RFValue(40)}}>{props.emoji}</Text>
+    </View>
   </TouchableOpacity>
 );
 

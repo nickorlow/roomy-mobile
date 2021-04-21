@@ -7,23 +7,28 @@ import Colors from '../constants/Colors';
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
 
-export default function OSIChooser(props: { clickFunc: Function, item: string, items: string[]}) {
+export default function OSIChooser(props: { clickFunc: Function, item: string, items: string[], style?:StyleProp<ViewStyle>}) {
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []);
   return(
-    <TouchableOpacity onPress={() => {props.clickFunc(props.item); forceUpdate(); }} style={{backgroundColor: props.items.indexOf(props.item)!=-1 ? 'rgba(200,200,200,.75)':'transparent',borderWidth: 1 , borderColor: 'blue', borderRadius: 5, margin: 5, padding:2}}>
-      <Text style={{fontSize: RFValue(16)}}>{props.item}</Text>
-    </TouchableOpacity>
+    <View style={[{backgroundColor: 'transparent', padding: 3, marginVertical: 5, paddingHorizontal:10}, props.style]}>
+      <TouchableOpacity onPress={() => {props.clickFunc(props.item); forceUpdate(); }} >
+        <View style={{backgroundColor:  props.items.indexOf(props.item)==-1 ? 'transparent': 'white', borderRadius: 5, padding: 2}}>
+          <Text style={{fontSize: RFValue(16)}}>{props.item}</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
   );
 }
 
 
 const styles = StyleSheet.create({
-  item: {
+  item2: {
     paddingLeft: 10,
     fontSize: 18,
     height: 44
   },
+  item: {},
   container: {
     flex: 1,
     alignItems: 'center',

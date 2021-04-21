@@ -30,7 +30,7 @@ export default function ChoreItem ({ chore }) {
       <Text style={{fontSize: RFValue(35)}}>{isLate ? '❗' :chore.emoji}</Text>
         <TransparentCard style={{paddingLeft: 5}}>
           <Text style={[styles.listItemTitle, {color: isLate ? "red" : isDoneSoon ? "#F59810" : adColors.text}]}>{chore.name}</Text>
-          <Text style={[{color: isLate ? adColors.systemRed : isDoneSoon ? "#F59810" : "grey", fontWeight: 'bold'}]}>{chore.date.toString()}</Text>
+          <Text style={[{color: isLate ? adColors.systemRed : isDoneSoon ? "#F59810" : "grey", fontWeight: 'bold'}]}>{chore.date.toLocaleString()}</Text>
           <Text style={[{color: isLate ? adColors.systemRed : isDoneSoon ? "#F59810" : "grey", fontWeight: 'bold'}]}>{chore.person}</Text>
         </TransparentCard>
       </View>
