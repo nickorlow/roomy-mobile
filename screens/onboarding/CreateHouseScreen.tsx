@@ -11,7 +11,7 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 
 export default function JoinHouseScreen({
   navigation,
-}: StackScreenProps<RootStackParamList, 'JoinHouse'>) {
+}: StackScreenProps<RootStackParamList, 'CreateHouse'>) {
 
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
   return (

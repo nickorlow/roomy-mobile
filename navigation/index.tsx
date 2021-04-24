@@ -8,7 +8,9 @@ import LoginScreen from '../screens/onboarding/LoginScreen';
 import NotificationScreen from '../screens/onboarding/NotificationScreen';
 import SubscriptionScreen from '../screens/onboarding/SubscriptionScreen';
 import LocationScreen from '../screens/onboarding/LocationScreen';
-
+import JoinCreateHouseScreen from '../screens/onboarding/JoinCreateHouseScreen';
+import JoinHouseScreen from '../screens/onboarding/JoinHouseScreen';
+import CreateHouseScreen from '../screens/onboarding/CreateHouseScreen';
 import WelcomeScreen from '../screens/onboarding/WelcomeScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import { RootStackParamList } from '../types';
@@ -41,7 +43,9 @@ function RootNavigator() {
       <Stack.Screen name='Location' component={LocationScreen} />
       <Stack.Screen name='Subscription' component={SubscriptionScreen} />
       <Stack.Screen name='Notification' component={NotificationScreen} />
-
+      <Stack.Screen name="JoinCreateHouse" component={JoinCreateHouseScreen} />
+      <Stack.Screen name="JoinHouse" component={JoinHouseScreen} />
+      <Stack.Screen name="CreateHouse" component={CreateHouseScreen} />
       <Stack.Screen name="Root" component={BottomTabNavigator} />
       
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
