@@ -14,24 +14,11 @@ import {getChores, getItemsToBuy} from './Constants';
 import GroceryItem from './GroceryListItem';
 
 
-const getItemCount = (data) => data.length;
-
-  
-const getItem = (data, index) => ({
-  id: Math.random().toString(12).substring(0),
-  itemName: data[index].itemName,
-  unitCost: data[index].unitCost,
-  unit: data[index].unit,
-  quantity: data[index].quantity,
-  isBought: data[index].isBought,
-  boughtFor: data[index].boughtFor
-});
-
 
 export default function GroceryScreen() {
 
   const [isVisible, setVisible] = useState(false);
-  
+
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
   const list = [];
 
@@ -56,7 +43,7 @@ export default function GroceryScreen() {
             <LongCard color={adColors.cardColor}>
             <View style={{ flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'space-between'}} >
               <TransparentCard>
-                <Text style={[styles.title, {maxWidth: 250, color:adColors.text }]}>Items to Buy</Text> 
+                <Text style={[styles.title, {maxWidth: 250, color:adColors.text }]}>Items to Buy</Text>
               </TransparentCard>
 
               <TouchableOpacity onPress={() => {setVisible(true)}}>

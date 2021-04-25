@@ -49,7 +49,22 @@ export default function ChoreDetailScreen(props: { isVisible: boolean, close: Fu
       </View>
 
 
-     
+
+      <TouchableOpacity onPress={() => props.close()} style={styles.link}>
+        <Card color={adColors.primaryColor} style={{ height: "100%", }}>
+          <Text style={[styles.subcontent, { textAlign: 'center', marginTop: 3 }]}>Mark as Done</Text>
+        </Card>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => props.close()} style={styles.link}>
+        <Card color={adColors.primaryColor} style={{ height: "100%", }}>
+          <Text style={[styles.subcontent, { textAlign: 'center', marginTop: 3 }]}>Delete This Occourance</Text>
+        </Card>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => props.close()} style={styles.link}>
+        <Card color={adColors.primaryColor} style={{ height: "100%", }}>
+          <Text style={[styles.subcontent, { textAlign: 'center', marginTop: 3 }]}>Fully Delete this Chore</Text>
+        </Card>
+      </TouchableOpacity>
       <TouchableOpacity onPress={() => props.close()} style={styles.link}>
         <Card color={adColors.primaryColor} style={{ height: "100%", }}>
           <Text style={[styles.subcontent, { textAlign: 'center', marginTop: 3 }]}>Close</Text>
@@ -87,8 +102,6 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 15,
     width: "100%",
-    position: 'absolute',
-    bottom: RFValue(50),
   },
   inputTitle: {
     fontWeight: 'bold',
