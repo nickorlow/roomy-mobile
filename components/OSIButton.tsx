@@ -16,7 +16,7 @@ import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
 import Card from "./Card";
 
-export default function OSIButton(props: { onPress: Function, value: string, style?:StyleProp<ViewStyle>, onLongPress?: Function}) {
+export default function OSIButton(props: { onPress: Function, value: string, color:string, style?:StyleProp<ViewStyle>, onLongPress?: Function}) {
     const [, updateState] = React.useState();
     const forceUpdate = React.useCallback(() => updateState({}), []);
 
@@ -25,8 +25,8 @@ export default function OSIButton(props: { onPress: Function, value: string, sty
 
     return(
         <TouchableOpacity onPress={() => props.onPress()} onLongPress={() => props.onLongPress!()} style={styles.link}>
-            <Card color={adColors.primaryColor} style={{ height: "100%", }}>
-                <Text style={[styles.subcontent, { textAlign: 'center', marginTop: 3 }]}>Close</Text>
+            <Card color={props.color} style={{ height: "100%", }}>
+                <Text style={[styles.subcontent, { textAlign: 'center', marginTop: 3 }]}>{props.value}</Text>
             </Card>
         </TouchableOpacity>
     );

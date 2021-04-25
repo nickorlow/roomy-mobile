@@ -11,6 +11,7 @@ import EmojiButton from '../components/EmojiButton';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import OSIChooser from '../components/OSIChooser';
 import {Picker} from '@react-native-picker/picker';
+import OSIButton from "../components/OSIButton";
 
 export type Chore = {
   emoji: string,
@@ -50,16 +51,10 @@ export default function ChoreDetailScreen(props: { isVisible: boolean, close: Fu
 
 
 
-      <TouchableOpacity onPress={() => props.close()} style={styles.link}>
-        <Card color={adColors.primaryColor} style={{ height: "100%", }}>
-          <Text style={[styles.subcontent, { textAlign: 'center', marginTop: 3 }]}>Mark as Done</Text>
-        </Card>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => props.close()} style={styles.link}>
-        <Card color={adColors.systemRed} style={{ height: "100%", }}>
-          <Text style={[styles.subcontent, { textAlign: 'center', marginTop: 3 }]}>Delete</Text>
-        </Card>
-      </TouchableOpacity>
+      <OSIButton onPress={props.close} value={"Mark as Done"} color={adColors.primaryColor}/>
+      <OSIButton onPress={props.close} value={"Delete"} color={adColors.systemRed}/>
+      <OSIButton onPress={props.close} value={"Close"} color={adColors.primaryColor}/>
+
 
     </Modal>
   );
