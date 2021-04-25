@@ -59,7 +59,7 @@ export default function HomeScreen() {
      </View>
         <ScrollView style={[{ width: "100%", height: "100%" }]}>
           <View style={styles.container}>
-            <ChoreCard/>
+            <ChoreCard listFunction={getMyChores} title={"My Chores"}/>
             <GroceryCard/>
           </View>
         </ScrollView>

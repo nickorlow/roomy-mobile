@@ -66,6 +66,17 @@ export function getMyChores() {
     return list;
 }
 
+export function getNotMyChores() {
+    var list = [];
+    for(var item of getChores()) {
+        if(item.person != "Nicholas Orlowsky") {
+            list.push(item);
+        }
+    }
+
+    return list;
+}
+
 export function addChore() {
 
 }

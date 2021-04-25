@@ -10,43 +10,19 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import { Ionicons } from '@expo/vector-icons';
 import ChoreDetailScreen, {Chore} from './ChoreDetailScreen';
 import ChoreItem from './ChoreListItem';
-import {getChores, getMyChores} from './Constants';
+import {getChores, getMyChores, getNotMyChores} from './Constants';
 import {useIsFocused} from "@react-navigation/native";
+import ChoreCard from "../components/ChoreCard";
 
 export default function ChoresScreen() {
-  const isFocused = useIsFocused();
-  const [isVisible, setVisible] = useState(false);
+
   const oadColors = useColorScheme() != "dark" ? Colors.dark : Colors.light;
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
-
-  const [houseList, setHouseList] = useState([]);
-  const [list, setList] = useState([]);
-  const [value, setValue] = useState(0); // integer state
-  function useForceUpdate(){
-    setValue(value+1); // update the state to force render
-  }
-
-  useEffect(() => {
-    var locList = [];
-    var locHouseList = [];
-    for (var item of getChores()) {
-      if(item.person != "Nicholas Orlowsky") {
-        locHouseList.push(<ChoreItem chore={item} closeFunc={useForceUpdate}/>);
-      }
-      else {
-        locList.push(<ChoreItem chore={item} closeFunc={useForceUpdate}/>);
-      }
-    }
-    setList(locList);
-    setHouseList(locHouseList);
-  }, [isFocused ,value]);
-
-
 
 
   return (
     <View style={styles.container}>
-      <AddChoreScreen isVisible={isVisible} close={() => setVisible(false)}/>
+
      <View style={[{minHeight: 200, backgroundColor:"#F59810", width: "100%", paddingTop:RFValue(50), paddingHorizontal: RFValue(10), paddingBottom: RFValue(10)}]}>
      <TransparentCard style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
        <TransparentCard>
@@ -59,42 +35,8 @@ export default function ChoresScreen() {
      </View>
         <ScrollView style={[{ width: "100%", height: "100%" }]}>
           <View style={styles.container}>
-
-            <LongCard color={adColors.cardColor}>
-            <View style={{ flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'space-between'}} >
-              <TransparentCard>
-                <Text style={[styles.title, {maxWidth: 250, color:adColors.text }]}>Your Chores</Text>
-              </TransparentCard>
-
-              <TouchableOpacity onPress={() => {setVisible(true)}}>
-                <Ionicons name="add-circle" color="#F59810" size={36}/>
-              </TouchableOpacity>
-              </View>
-              {list}
-
-<Text style={{textAlign: 'center', color: "#F59810", fontWeight: 'bold', fontSize: 25}}>See All</Text>
-            </LongCard>
-
-
-
-            <LongCard color={adColors.cardColor}>
-            <View style={{ flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'space-between'}} >
-              <TransparentCard>
-                <Text style={[styles.title, {maxWidth: 250, color:adColors.text }]}>House Chores</Text>
-              </TransparentCard>
-
-              <TouchableOpacity onPress={() => {Alert.alert('Not Implemented!')}}>
-                <Ionicons name="add-circle" color="#F59810" size={36}/>
-              </TouchableOpacity>
-              </View>
-             {houseList}
-
-<Text style={{textAlign: 'center', color: "#F59810", fontWeight: 'bold', fontSize: 25}}>See All</Text>
-            </LongCard>
-
-
-
-
+            <ChoreCard listFunction={getMyChores} title={"My Chores"}/>
+            <ChoreCard listFunction={getNotMyChores} title={"House Chores"}/>
           </View>
         </ScrollView>
     </View>
