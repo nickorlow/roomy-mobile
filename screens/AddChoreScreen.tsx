@@ -11,6 +11,7 @@ import EmojiButton from '../components/EmojiButton';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import OSIChooser from '../components/OSIChooser';
 import RNPickerSelect from 'react-native-picker-select';
+import OSIInput from "../components/OSIInput";
 
 export default function AddChoreScreen(props: { isVisible: boolean, close: Function }) {
 
@@ -40,12 +41,7 @@ export default function AddChoreScreen(props: { isVisible: boolean, close: Funct
 
       <View style={{ padding: 10 }}>
         <Text style={styles.inputTitle}>Name</Text>
-        <TextInput
-          style={styles.input}
-          value={name}
-          placeholder="Chore Name"
-          onChangeText={(e) => { setName(e) }}
-        />
+        <OSIInput clickFunc={setName} value={name}/>
         <Text style={styles.inputTitle}>Roommate</Text>
         <View style={styles.input}>
           <RNPickerSelect

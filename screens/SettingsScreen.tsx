@@ -63,7 +63,7 @@ export default function SettingsScreen({
       </Card>
 
       <View style={{marginTop:RFValue(10), alignItems: 'center', flex: 1}}>
-        <Text style={{color: adColors.text}}>Roomy (Codename: TBD) v1.0</Text>
+        <Text style={{color: adColors.text}}>Roomy (Codename: Tres Amigos) v1.0</Text>
         <Text style={{color: adColors.text}}>Copyright © Orlow Software Inc</Text>
       </View>
     </View>

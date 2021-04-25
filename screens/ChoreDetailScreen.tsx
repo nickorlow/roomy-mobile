@@ -10,6 +10,7 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import EmojiButton from '../components/EmojiButton';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import OSIChooser from '../components/OSIChooser';
+import {Picker} from '@react-native-picker/picker';
 
 export type Chore = {
   emoji: string,

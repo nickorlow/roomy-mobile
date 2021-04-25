@@ -30,7 +30,7 @@ const getChore = (data, index) => ({
 export default function ChoresScreen() {
 
   const [isVisible, setVisible] = useState(false);
-  
+  const oadColors = useColorScheme() != "dark" ? Colors.dark : Colors.light;
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
   const list = [];
   const houseList = [];
@@ -51,10 +51,10 @@ export default function ChoresScreen() {
      <View style={[{minHeight: 200, backgroundColor:"#F59810", width: "100%", paddingTop:RFValue(50), paddingHorizontal: RFValue(10), paddingBottom: RFValue(10)}]}>
      <TransparentCard style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
        <TransparentCard>
-        <Text style={[styles.title, {paddingBottom: RFValue(8)}]}>Chores</Text>
-        <Text style={styles.subheader}>You have 5 chores left today.</Text>
-        <Text style={styles.subheader}>1 Chore is late.</Text>
-        <Text style={styles.subheader}>1 Chore needs to be finished soon.</Text>
+        <Text style={[styles.title, {paddingBottom: RFValue(8), color: oadColors.text}]}>Chores</Text>
+        <Text  style={[styles.subheader,{color: oadColors.text}]}>You have 5 chores left today.</Text>
+        <Text  style={[styles.subheader,{color: oadColors.text}]}>1 Chore is late.</Text>
+        <Text  style={[styles.subheader,{color: oadColors.text}]}>1 Chore needs to be finished soon.</Text>
        </TransparentCard>
      </TransparentCard>
      </View>

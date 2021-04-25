@@ -49,6 +49,7 @@ const getChore = (data, index) => ({
 export default function HomeScreen() {
 
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
+  const oadColors = useColorScheme() != "dark" ? Colors.dark : Colors.light;
   const list = [];
 
   for (var item of getMyChores().slice(0,3)) {
@@ -58,13 +59,13 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
      <View style={[{minHeight: 200, backgroundColor:"#F59810", width: "100%", paddingTop:RFValue(50), paddingHorizontal: RFValue(10), paddingBottom: RFValue(10)}]}>
-       <Text style={[styles.title, {paddingBottom: RFValue(8)}]}>Good Evening, Erlich</Text>
-       <Text style={styles.subheader}>Nobody is home.</Text>
-       <Text style={styles.subheader}>You have 5 chores left today.</Text>
-       <Text style={styles.subheader}>Carson's guest will arrive in 15 minutes.</Text>
+       <Text style={[styles.title, {paddingBottom: RFValue(8), color: oadColors.text}]}>Good Evening, Nicholas</Text>
+       <Text style={[styles.subheader,{color: oadColors.text}]}>Nobody is home.</Text>
+       <Text style={[styles.subheader,{color: oadColors.text}]}>You have 5 chores left today.</Text>
+       <Text style={[styles.subheader,{color: oadColors.text}]}>Carson's guest will arrive in 15 minutes.</Text>
        <TransparentCard style={{ flexDirection: 'row', paddingTop: 15}}>
-         <Ionicons name="moon" color="#fff" size={24}/>
-        <Text style={[styles.subheader, {paddingTop:RFValue(3), paddingLeft: RFValue(10)}]}>It is currently quiet hours</Text>
+         <Ionicons name="moon" color={oadColors.text} size={24}/>
+        <Text style={[styles.subheader, {paddingTop:RFValue(3), paddingLeft: RFValue(10), color: oadColors.text}]}>It is currently quiet hours</Text>
        </TransparentCard>
      </View>
         <ScrollView style={[{ width: "100%", height: "100%" }]}>
