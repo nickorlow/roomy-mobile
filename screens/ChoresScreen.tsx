@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, FlatList, TouchableOpacity, VirtualizedList, Button, Alert, DynamicColorIOS } from 'react-native';
 import Card, { TitledCard, TransparentCard, LongTitledCard, LongCard } from '../components/Card';
 import { Text, View } from '../components/Themed';
@@ -10,39 +10,38 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import { Ionicons } from '@expo/vector-icons';
 import ChoreDetailScreen, {Chore} from './ChoreDetailScreen';
 import ChoreItem from './ChoreListItem';
-import {getChores} from './Constants';
-
-
-const getChoreCount = (data) => data.length;
-
-  
-const getChore = (data, index) => ({
-  id: Math.random().toString(12).substring(0),
-  name: data[index].name,
-  date: data[index].date,
-  isLate: data[index].isLate,
-  isDoneSoon: data[index].isDoneSoon,
-  emoji: data[index].emoji,
-  person: data[index].person
-});
-
+import {getChores, getMyChores} from './Constants';
+import {useIsFocused} from "@react-navigation/native";
 
 export default function ChoresScreen() {
-
+  const isFocused = useIsFocused();
   const [isVisible, setVisible] = useState(false);
   const oadColors = useColorScheme() != "dark" ? Colors.dark : Colors.light;
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
-  const list = [];
-  const houseList = [];
 
-  for (var item of getChores()) {
-    if(item.person != "Nicholas Orlowsky") {
-      houseList.push(<ChoreItem chore={item} />);
-    }
-    else {
-      list.push(<ChoreItem chore={item} />);
-    }
+  const [houseList, setHouseList] = useState([]);
+  const [list, setList] = useState([]);
+  const [value, setValue] = useState(0); // integer state
+  function useForceUpdate(){
+    setValue(value+1); // update the state to force render
   }
+
+  useEffect(() => {
+    var locList = [];
+    var locHouseList = [];
+    for (var item of getChores()) {
+      if(item.person != "Nicholas Orlowsky") {
+        locHouseList.push(<ChoreItem chore={item} closeFunc={useForceUpdate}/>);
+      }
+      else {
+        locList.push(<ChoreItem chore={item} closeFunc={useForceUpdate}/>);
+      }
+    }
+    setList(locList);
+    setHouseList(locHouseList);
+  }, [isFocused ,value]);
+
+
 
 
   return (
@@ -64,7 +63,7 @@ export default function ChoresScreen() {
             <LongCard color={adColors.cardColor}>
             <View style={{ flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'space-between'}} >
               <TransparentCard>
-                <Text style={[styles.title, {maxWidth: 250, color:adColors.text }]}>Your Chores</Text> 
+                <Text style={[styles.title, {maxWidth: 250, color:adColors.text }]}>Your Chores</Text>
               </TransparentCard>
 
               <TouchableOpacity onPress={() => {setVisible(true)}}>
@@ -81,7 +80,7 @@ export default function ChoresScreen() {
             <LongCard color={adColors.cardColor}>
             <View style={{ flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'space-between'}} >
               <TransparentCard>
-                <Text style={[styles.title, {maxWidth: 250, color:adColors.text }]}>House Chores</Text> 
+                <Text style={[styles.title, {maxWidth: 250, color:adColors.text }]}>House Chores</Text>
               </TransparentCard>
 
               <TouchableOpacity onPress={() => {Alert.alert('Not Implemented!')}}>

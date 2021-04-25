@@ -1,13 +1,24 @@
 import Chore from './ChoreListItem'
 
-var placeholderChores = [
-    { name: "Grocery Run", date: new Date(new Date().setHours(new Date().getHours()+1)), emoji: '🛒', person: "Nicholas Orlowsky" },
-    { name: "Serve Dinner", date: new Date(), emoji: '🧑‍🍳' , person: "Nicholas Orlowsky" },
-    { name: "Fix Cabinet", date: new Date(new Date().setHours(new Date().getHours()+1)), emoji: '🛠', person: "Nicholas Orlowsky" },
+var initPlaceholderChores = [
+    { name: "Grocery Run", date: new Date(new Date().setHours(new Date().getHours()+1)), emoji: '🛒', person: "Nicholas Orlowsky", id: "100" },
+    { name: "Serve Dinner", date: new Date(), emoji: '🧑‍🍳' , person: "Nicholas Orlowsky", id: "101" },
+    { name: "Fix Cabinet", date: new Date(new Date().setHours(new Date().getHours()+1)), emoji: '🛠', person: "Nicholas Orlowsky", id: "102" },
+    { name: "Clean Living Room", date: new Date(new Date().setHours(new Date().getHours()+1)),  emoji: '🧹', person:'Carson Hammock', id: "103"},
+    { name: "Fix Car", date: new Date(new Date().setHours(new Date().getHours()+1)) , emoji: '🚘', person:'Carson Hammock', id: "104" },
+    { name: "Cook Lunch", date: new Date(new Date().setHours(new Date().getHours()+1)), emoji: '🧑‍🍳', person:'Cory Chang', id: "105"},
 
-    { name: "Clean Living Room", date: new Date(new Date().setHours(new Date().getHours()+1)),  emoji: '🧹', person:'Carson Hammock'},
-    { name: "Fix Car", date: new Date(new Date().setHours(new Date().getHours()+1)) , emoji: '🚘', person:'Carson Hammock' },
-    { name: "Cook Lunch", date: new Date(new Date().setHours(new Date().getHours()+1)), emoji: '🧑‍🍳', person:'Cory Chang'},
+];
+
+
+var placeholderChores = [
+    { name: "Grocery Run", date: new Date(new Date().setHours(new Date().getHours()+1)), emoji: '🛒', person: "Nicholas Orlowsky", id: "100" },
+    { name: "Serve Dinner", date: new Date(), emoji: '🧑‍🍳' , person: "Nicholas Orlowsky", id: "101" },
+    { name: "Fix Cabinet", date: new Date(new Date().setHours(new Date().getHours()+1)), emoji: '🛠', person: "Nicholas Orlowsky", id: "102" },
+
+    { name: "Clean Living Room", date: new Date(new Date().setHours(new Date().getHours()+1)),  emoji: '🧹', person:'Carson Hammock', id: "103"},
+    { name: "Fix Car", date: new Date(new Date().setHours(new Date().getHours()+1)) , emoji: '🚘', person:'Carson Hammock', id: "104" },
+    { name: "Cook Lunch", date: new Date(new Date().setHours(new Date().getHours()+1)), emoji: '🧑‍🍳', person:'Cory Chang', id: "105"},
 
 ];
 
@@ -24,6 +35,16 @@ export function getChores() {
         return a.date.valueOf() - b.date.valueOf();
     });
     return placeholderChores;
+}
+
+export function markChoreDone(id: string) {
+    placeholderChores = placeholderChores.filter(function( obj ) {
+        return obj.id !== id;
+    });
+}
+
+export function resetVars() {
+    placeholderChores = initPlaceholderChores;
 }
 
 export function getMyChores() {
@@ -61,3 +82,4 @@ function sortByDueDate(myArray: []): void {
 
     });
 }
+

@@ -12,6 +12,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import OSIChooser from '../components/OSIChooser';
 import RNPickerSelect from 'react-native-picker-select';
 import OSIInput from "../components/OSIInput";
+import OSIButton from "../components/OSIButton";
 
 export default function AddChoreScreen(props: { isVisible: boolean, close: Function }) {
 
@@ -102,11 +103,7 @@ export default function AddChoreScreen(props: { isVisible: boolean, close: Funct
           <OSIChooser clickFunc={setDuration} item="1 Hour +" items={[duration]} style={{ borderBottomRightRadius: 5, borderTopRightRadius: 5 }} />
         </View>
       </View>
-      <TouchableOpacity onPress={() => props.close()} style={styles.link}>
-        <Card color={adColors.primaryColor} style={{ height: "100%", }}>
-          <Text style={[styles.subcontent, { textAlign: 'center', marginTop: 3 }]}>Add Chore</Text>
-        </Card>
-      </TouchableOpacity>
+     <OSIButton value={"Add Chore"} color={adColors.primaryColor} onPress={props.close}/>
     </Modal>
   );
 }

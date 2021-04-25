@@ -12,11 +12,14 @@ import { Ionicons } from '@expo/vector-icons';
 
 import ChoreItem from './ChoreListItem';
 import { getChores, getMyChores } from './Constants';
+import {useEffect, useState} from "react";
+
+import { useIsFocused } from "@react-navigation/native";
 
 const getItemCount = (data) => data.length;
 const Item = ({ product, req }) => (
   <View style={[styles.item, {backgroundColor: 'transparent'}]}>
-   
+
     <View style={{ flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'space-between'}} >
       <TransparentCard style={{paddingLeft: RFValue(10)}}>
         <Text style={styles.listItemTitle}>{product.substring(0,24)+(product.length > 24 ? '...' : '')}</Text>
@@ -34,27 +37,28 @@ const getItem = (data, index) => ({
   req: data[index].req
 });
 
-const getChoreCount = (data) => data.length;
-
-const getChore = (data, index) => ({
-  id: Math.random().toString(12).substring(0),
-  name: data[index].name,
-  date: data[index].date,
-  isLate: data[index].isLate,
-  isDoneSoon: data[index].isDoneSoon,
-  emoji: data[index].emoji
-});
-
 
 export default function HomeScreen() {
 
+  const isFocused = useIsFocused();
+
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
   const oadColors = useColorScheme() != "dark" ? Colors.dark : Colors.light;
-  const list = [];
-
-  for (var item of getMyChores().slice(0,3)) {
-    list.push(<ChoreItem chore={item} />);
+  const [list, setList] = useState([]);
+  const [value, setValue] = useState(0); // integer state
+  function useForceUpdate(){
+    setValue(value+1); // update the state to force render
   }
+
+  useEffect(() => {
+    var locList = [];
+    for (var item of getMyChores().slice(0,3)) {
+      locList.push(<ChoreItem chore={item} closeFunc={useForceUpdate}/>);
+    }
+    setList(locList);
+  }, [isFocused ,value]);
+
+
 
   return (
     <View style={styles.container}>
@@ -74,26 +78,26 @@ export default function HomeScreen() {
             <LongCard color={adColors.cardColor}>
             <View style={{ flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'space-between'}} >
               <TransparentCard>
-                <Text style={[styles.title, {maxWidth: 250, color:adColors.text }]}>Chores</Text> 
+                <Text style={[styles.title, {maxWidth: 250, color:adColors.text }]}>Chores</Text>
               </TransparentCard>
 
               <TouchableOpacity onPress={() => {Alert.alert('Not Implemented!')}}>
                 <Ionicons name="add-circle" color="#F59810" size={36}/>
               </TouchableOpacity>
               </View>
-              
-            {list}
-              
 
-<Text style={{textAlign: 'center', color: "#F59810", fontWeight: 'bold', fontSize: 25}}>4 More This Week</Text>
+            {list}
+
+              { (getMyChores().length-3 > 0) &&
+<Text style={{textAlign: 'center', color: "#F59810", fontWeight: 'bold', fontSize: 25, }}>{getMyChores().length-3} left</Text>}
             </LongCard>
 
             <LongCard color={adColors.cardColor}>
             <View style={{ flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'space-between'}} >
               <TransparentCard>
-                <Text style={[styles.title, {maxWidth: 250, color:adColors.text }]}>Groceries</Text> 
+                <Text style={[styles.title, {maxWidth: 250, color:adColors.text }]}>Groceries</Text>
                 <Text style={{paddingLeft: 5, color:"grey", fontWeight: 'bold'}}>Next grocery run: Saturday at 5:00 PM</Text>
-              </TransparentCard>   
+              </TransparentCard>
               <TouchableOpacity onPress={() => {Alert.alert('Not Implemented!')}}>
                 <Ionicons name="add-circle" color="#F59810" size={36}/>
               </TouchableOpacity>
@@ -103,7 +107,7 @@ export default function HomeScreen() {
                   { product: 'Eggs', req: "For the whole Apartment" },
                   { product: 'Salad', req: "For Carson Hammock" },
                   { product: 'Space Exploration Technologies, Inc Falcon 9 Reusable Rocket', req: 'For Nicholas Orlowsky' },
-                  
+
                 ]}
                 getItemCount={getItemCount}
                 getItem={getItem}

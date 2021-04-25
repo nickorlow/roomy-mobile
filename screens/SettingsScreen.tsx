@@ -10,6 +10,8 @@ import useColorScheme from '../hooks/useColorScheme';
 import { Ionicons } from '@expo/vector-icons';
 
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import OSIButton from "../components/OSIButton";
+import {resetVars} from "./Constants";
 export default function SettingsScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, 'Settings'>) {
@@ -61,7 +63,7 @@ export default function SettingsScreen({
         </View></View>
         </TouchableOpacity>
       </Card>
-
+<OSIButton onPress={resetVars} value={"Reset Vars"} color={adColors.systemRed}/>
       <View style={{marginTop:RFValue(10), alignItems: 'center', flex: 1}}>
         <Text style={{color: adColors.text}}>Roomy (Codename: Tres Amigos) v1.0</Text>
         <Text style={{color: adColors.text}}>Copyright © Orlow Software Inc</Text>

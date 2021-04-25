@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, FlatList, VirtualizedList, Button, Alert, Modal, TouchableOpacity, useColorScheme, TextInput } from 'react-native';
 import Card, { TransparentCard } from '../components/Card'
 import EditScreenInfo from '../components/EditScreenInfo';
@@ -12,12 +12,15 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import OSIChooser from '../components/OSIChooser';
 import {Picker} from '@react-native-picker/picker';
 import OSIButton from "../components/OSIButton";
+import { Audio } from 'expo-av';
+import {markChoreDone} from "./Constants";
 
 export type Chore = {
   emoji: string,
   name: string,
   date: Date,
-  person: string
+  person: string,
+  id: string
 };
 
 export default function ChoreDetailScreen(props: { isVisible: boolean, close: Function, chore: Chore }) {
@@ -29,6 +32,7 @@ export default function ChoreDetailScreen(props: { isVisible: boolean, close: Fu
   const [duration, setDuration] = useState('1 - 5 Minutes');
   const [repetetion, setRepetetion] = useState('Daily');
   const [name, setName] = useState('');
+  const [doneSound, setDoneSound]: any = useState();
 
   function addDay(day: string)
   {
@@ -38,7 +42,36 @@ export default function ChoreDetailScreen(props: { isVisible: boolean, close: Fu
     setDays(localDays);
   }
 
+  function deleteChore()
+  {
+    Alert.alert("Delete Chore", "Would you like to delete this occurrence, or all occurrences?", [{text:"Delete this occurrence", style:"destructive"}, {text:"Delete all occurrences", style:"destructive"}, {text:"Cancel", style:"cancel"}])
+  }
+
+  async function markChoreDonePress()
+  {
+    await playSound();
+    markChoreDone(props.chore.id);
+    props.close();
+  }
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(
+        require('../static/sounds/ApplePaySuccessSoundEffect.mp3')
+    );
+    setDoneSound(sound);
+
+    console.log('Playing Sound');
+    await sound.playAsync(); }
+
+  React.useEffect(() => {
+    return doneSound
+        ? () => {
+          console.log('Unloading Sound');
+          doneSound.unloadAsync(); }
+        : undefined;
+  }, [doneSound]);
+
   return (
+
     <Modal animationType={"slide"} presentationStyle="pageSheet" visible={props.isVisible} onRequestClose={() => props.close()} onDismiss={() => props.close()} style={{ backgroundColor: adColors.background }}>
 
       <View style={[{ minHeight: 100, backgroundColor: "#F59810", width: "100%", paddingTop: RFValue(25), paddingHorizontal: RFValue(10), paddingBottom: RFValue(10), flexDirection: 'row', justifyContent: 'space-between' }]}>
@@ -48,14 +81,11 @@ export default function ChoreDetailScreen(props: { isVisible: boolean, close: Fu
           </TransparentCard>
         <Text style={{fontSize: RFValue(75)}}>{props.chore.emoji}</Text>
       </View>
-
-
-
-      <OSIButton onPress={props.close} value={"Mark as Done"} color={adColors.primaryColor}/>
-      <OSIButton onPress={props.close} value={"Delete"} color={adColors.systemRed}/>
-      <OSIButton onPress={props.close} value={"Close"} color={adColors.primaryColor}/>
-
-
+      <View style={{position: "absolute", bottom: RFValue(50), width: "100%"}}>
+            <OSIButton onPress={deleteChore} value={"Delete"} color={adColors.systemRed}/>
+            <OSIButton onPress={markChoreDonePress} value={"Mark as Done"} color={adColors.primaryColor}/>
+            <OSIButton onPress={props.close} value={"Close"} color={adColors.primaryColor}/>
+      </View>
     </Modal>
   );
 }
@@ -77,17 +107,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 35,
     fontWeight: 'bold'
-  },
-  subcontent: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white'
-  },
-  link: {
-    height: 90,
-    paddingVertical: 20,
-    paddingHorizontal: 15,
-    width: "100%",
   },
   inputTitle: {
     fontWeight: 'bold',
