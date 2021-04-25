@@ -12,20 +12,11 @@ import ChoreDetailScreen, {Chore} from './ChoreDetailScreen';
 import ChoreItem from './ChoreListItem';
 import {getChores, getItemsToBuy} from './Constants';
 import GroceryItem from './GroceryListItem';
+import GroceryCard from "../components/GroceryCard";
 
 
 
 export default function GroceryScreen() {
-
-  const [isVisible, setVisible] = useState(false);
-
-  const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
-  const list = [];
-
-  for (var item of getItemsToBuy()) {
-    list.push(<GroceryItem item={item} />);
-  }
-
 
   return (
     <View style={styles.container}>
@@ -40,21 +31,7 @@ export default function GroceryScreen() {
         <ScrollView style={[{ width: "100%", height: "100%" }]}>
           <View style={styles.container}>
 
-            <LongCard color={adColors.cardColor}>
-            <View style={{ flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'space-between'}} >
-              <TransparentCard>
-                <Text style={[styles.title, {maxWidth: 250, color:adColors.text }]}>Items to Buy</Text>
-              </TransparentCard>
-
-              <TouchableOpacity onPress={() => {setVisible(true)}}>
-                <Ionicons name="add-circle" color="#F59810" size={36}/>
-              </TouchableOpacity>
-              </View>
-              {list}
-
-<Text style={{textAlign: 'center', color: "#F59810", fontWeight: 'bold', fontSize: 25}}>See All</Text>
-            </LongCard>
-
+          <GroceryCard/>
 
 
 

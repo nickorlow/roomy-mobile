@@ -81,7 +81,7 @@ export default function ChoreDetailScreen(props: { isVisible: boolean, close: Fu
           </TransparentCard>
         <Text style={{fontSize: RFValue(75)}}>{props.chore.emoji}</Text>
       </View>
-      <View style={{position: "absolute", bottom: RFValue(50), width: "100%"}}>
+      <View style={{height: "100%", backgroundColor: adColors.background}}>
             <OSIButton onPress={deleteChore} value={"Delete"} color={adColors.systemRed}/>
             <OSIButton onPress={markChoreDonePress} value={"Mark as Done"} color={adColors.primaryColor}/>
             <OSIButton onPress={props.close} value={"Close"} color={adColors.primaryColor}/>
