@@ -56,20 +56,11 @@ export default function ChoreDetailScreen(props: { isVisible: boolean, close: Fu
         </Card>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => props.close()} style={styles.link}>
-        <Card color={adColors.primaryColor} style={{ height: "100%", }}>
-          <Text style={[styles.subcontent, { textAlign: 'center', marginTop: 3 }]}>Delete This Occourance</Text>
+        <Card color={adColors.systemRed} style={{ height: "100%", }}>
+          <Text style={[styles.subcontent, { textAlign: 'center', marginTop: 3 }]}>Delete</Text>
         </Card>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => props.close()} style={styles.link}>
-        <Card color={adColors.primaryColor} style={{ height: "100%", }}>
-          <Text style={[styles.subcontent, { textAlign: 'center', marginTop: 3 }]}>Fully Delete this Chore</Text>
-        </Card>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => props.close()} style={styles.link}>
-        <Card color={adColors.primaryColor} style={{ height: "100%", }}>
-          <Text style={[styles.subcontent, { textAlign: 'center', marginTop: 3 }]}>Close</Text>
-        </Card>
-      </TouchableOpacity>
+
     </Modal>
   );
 }
