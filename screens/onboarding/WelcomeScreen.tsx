@@ -1,11 +1,10 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import * as React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, TextInput } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { RootStackParamList } from '../../types';
-import Card, { FeatureCard, TitledCard } from '../../components/Card';
+import Card, { FeatureCard } from '../../components/Card';
 import Colors from '../../constants/Colors';
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { RFValue } from "react-native-responsive-fontsize";
 
 import useColorScheme from '../../hooks/useColorScheme';
 

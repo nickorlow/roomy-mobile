@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, FlatList, VirtualizedList, Button, Alert, Modal, TouchableOpacity, useColorScheme, TextInput } from 'react-native';
-import Card, { TransparentCard } from '../components/Card'
-import EditScreenInfo from '../components/EditScreenInfo';
+import { StyleSheet, Modal, useColorScheme } from 'react-native';
 import { Text, View } from '../components/Themed';
-
-import DropDownPicker from 'react-native-dropdown-picker';
 import Colors from '../constants/Colors';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import EmojiButton from '../components/EmojiButton';

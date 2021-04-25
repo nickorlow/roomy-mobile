@@ -1,43 +1,14 @@
 import * as React from 'react';
-import { StyleSheet, FlatList, VirtualizedList, Button, Alert, ScrollView, TouchableOpacity } from 'react-native';
-
-import EditScreenInfo from '../components/EditScreenInfo';
-import Card, { TitledCard, LongTitledCard, TransparentCard, LongCard } from '../components/Card';
+import { StyleSheet, ScrollView } from 'react-native';
+import { TransparentCard } from '../components/Card';
 import { Text, View } from '../components/Themed';
-import { LinearGradient } from 'expo-linear-gradient';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Ionicons } from '@expo/vector-icons';
-
-import ChoreItem from './ChoreListItem';
-import { getChores, getMyChores } from './Constants';
-import {useEffect, useState} from "react";
-
-import { useIsFocused } from "@react-navigation/native";
+import { getMyChores } from './Constants';
 import ChoreCard from "../components/ChoreCard";
 import GroceryCard from "../components/GroceryCard";
-
-const getItemCount = (data) => data.length;
-const Item = ({ product, req }) => (
-  <View style={[styles.item, {backgroundColor: 'transparent'}]}>
-
-    <View style={{ flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'space-between'}} >
-      <TransparentCard style={{paddingLeft: RFValue(10)}}>
-        <Text style={styles.listItemTitle}>{product.substring(0,24)+(product.length > 24 ? '...' : '')}</Text>
-        <Text style={{fontWeight: 'bold', color: "grey"}}>{req}</Text>
-      </TransparentCard>
-      <TouchableOpacity onPress={() => {Alert.alert('We should ask for a vote on this button press')}}>
-      <Text style={{fontSize: RFValue(35)}}>{req == "For the whole Apartment" ? '🗳️': ''}</Text>
-      </TouchableOpacity>
-    </View>
-  </View>
-);
-const getItem = (data, index) => ({
-  id: Math.random().toString(12).substring(0),
-  product: data[index].product,
-  req: data[index].req
-});
 
 
 export default function HomeScreen() {
@@ -77,8 +48,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: "transparent"
-    // paddingTop: 30
-    // justifyContent: 'center',
   },
   title: {
     fontSize: 35,

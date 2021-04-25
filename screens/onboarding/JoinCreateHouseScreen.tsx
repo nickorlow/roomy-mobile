@@ -1,15 +1,14 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import * as React from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, TextInput, TouchableHighlight, Alert } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import { RootStackParamList } from '../../types';
-import Card, { MicroFeatureCard, TitledCard, FeatureCard } from '../../components/Card';
+import Card from '../../components/Card';
 import Colors from '../../constants/Colors';
 import useColorScheme from '../../hooks/useColorScheme';
 import { Ionicons } from '@expo/vector-icons';
+import { RFValue } from "react-native-responsive-fontsize";
 
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 export default function JoinCreateHouseScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, 'JoinCreateHouse'>) {
@@ -36,7 +35,7 @@ export default function JoinCreateHouseScreen({
     <View style={styles.container}>
       <Ionicons name="home" size={54} color={adColors.primaryColor} />
       <Text style={[styles.title, { color: adColors.text }]}>House</Text>
-      
+
       <Card color={adColors.cardColor} style={{ width: "90%",maxHeight: RFValue(175), borderColor: create ? adColors.primaryColor : adColors.background, borderWidth:  1.5}}>
       <TouchableOpacity onPress={() => { setCreate(true) }} ><View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'transparent' }}>
@@ -44,9 +43,9 @@ export default function JoinCreateHouseScreen({
             <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>Create a House</Text>
             <Text style={{color: adColors.text}}>Create a house for your roommates to join!</Text>
           </View>
-        
+
             <Ionicons name={!create ? 'md-radio-button-off' : 'md-radio-button-on'} size={24} color={create ? adColors.primaryColor : adColors.text} />
-         
+
         </View></View>
         </TouchableOpacity>
       </Card>
@@ -59,7 +58,7 @@ export default function JoinCreateHouseScreen({
             <Text style={{color: adColors.text}}>Join a house that has already been created</Text>
           </View>
             <Ionicons name={create ? 'md-radio-button-off' : 'md-radio-button-on'} size={24} color={!create ? adColors.primaryColor : adColors.text} />
-     
+
         </View>
 </View>
         </TouchableOpacity>

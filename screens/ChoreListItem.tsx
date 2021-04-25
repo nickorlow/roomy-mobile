@@ -7,7 +7,6 @@ import Colors from '../constants/Colors';
 import { ScrollView } from 'react-native-gesture-handler';
 import useColorScheme from '../hooks/useColorScheme';
 import { RFValue } from 'react-native-responsive-fontsize';
-import { Ionicons } from '@expo/vector-icons';
 import ChoreDetailScreen, {Chore} from './ChoreDetailScreen';
 
 

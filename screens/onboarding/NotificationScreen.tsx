@@ -1,15 +1,14 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import * as React from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, TextInput, TouchableHighlight, Alert } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { StyleSheet, Text, TouchableOpacity, View, Alert } from 'react-native';
 import { RootStackParamList } from '../../types';
-import Card, { MicroFeatureCard, TitledCard, FeatureCard } from '../../components/Card';
+import Card, { MicroFeatureCard } from '../../components/Card';
 import Colors from '../../constants/Colors';
 import useColorScheme from '../../hooks/useColorScheme';
 import { Ionicons } from '@expo/vector-icons';
+import { RFValue } from "react-native-responsive-fontsize";
 
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 export default function NotificationScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, 'Notification'>) {
@@ -38,7 +37,7 @@ export default function NotificationScreen({
       <Text style={[styles.title, { color: adColors.text }]}>Notifications</Text>
 
       {/*<Text style={[{ color: adColors.text }]}>Enjoy news stories, summarized to save you time without bias.</Text>*/}
-      
+
       <Card color={adColors.cardColor} style={{ width: "90%",maxHeight: RFValue(175), borderColor: sendNotifs ? adColors.primaryColor : adColors.background, borderWidth:  1.5}}>
       <TouchableOpacity onPress={() => { setNotifs(true) }} ><View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'transparent' }}>
@@ -46,9 +45,9 @@ export default function NotificationScreen({
             <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>On</Text>
             <Text style={{color: adColors.text}}>Get reminded to do chores</Text>
           </View>
-        
+
             <Ionicons name={!sendNotifs ? 'md-radio-button-off' : 'md-radio-button-on'} size={24} color={sendNotifs ? adColors.primaryColor : adColors.text} />
-         
+
         </View>
         <View style={[styles.separator, { backgroundColor: adColors.text }]} />
         <MicroFeatureCard content="Make a habit of doing chores" iconcolor={adColors.text} icon="time" />
@@ -66,7 +65,7 @@ export default function NotificationScreen({
             <Text style={{color: adColors.systemRed}}>Not Reccomended</Text>
           </View>
             <Ionicons name={sendNotifs ? 'md-radio-button-off' : 'md-radio-button-on'} size={24} color={!sendNotifs ? adColors.primaryColor : adColors.text} />
-     
+
         </View>
 </View>
         </TouchableOpacity>

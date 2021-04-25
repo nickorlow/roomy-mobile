@@ -1,16 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import { StyleSheet, FlatList, VirtualizedList, Button, Alert, Modal, TouchableOpacity, useColorScheme, TextInput } from 'react-native';
-import Card, { TransparentCard } from '../components/Card'
-import EditScreenInfo from '../components/EditScreenInfo';
+import React, { useState} from 'react';
+import { StyleSheet, Alert, Modal, useColorScheme } from 'react-native';
+import { TransparentCard } from '../components/Card'
 import { Text, View } from '../components/Themed';
-
-import DropDownPicker from 'react-native-dropdown-picker';
 import Colors from '../constants/Colors';
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import EmojiButton from '../components/EmojiButton';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import OSIChooser from '../components/OSIChooser';
-import {Picker} from '@react-native-picker/picker';
+import { RFValue } from "react-native-responsive-fontsize";
 import OSIButton from "../components/OSIButton";
 import { Audio } from 'expo-av';
 import {markChoreDone} from "./Constants";

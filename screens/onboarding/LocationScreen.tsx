@@ -1,15 +1,13 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import * as React from 'react';
-import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, TextInput, TouchableHighlight, Alert } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import { RootStackParamList } from '../../types';
-import Card, { MicroFeatureCard, TitledCard, FeatureCard } from '../../components/Card';
+import Card, { FeatureCard } from '../../components/Card';
 import Colors from '../../constants/Colors';
 import useColorScheme from '../../hooks/useColorScheme';
 import { Ionicons } from '@expo/vector-icons';
+import { RFValue } from "react-native-responsive-fontsize";
 
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 export default function SubscriptionScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, 'Location'>) {
@@ -75,7 +73,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "transparent",
     alignItems: 'center',
-    
+
     marginTop: RFValue(100)
   },
   title: {

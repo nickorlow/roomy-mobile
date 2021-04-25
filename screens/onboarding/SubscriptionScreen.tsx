@@ -1,15 +1,14 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import * as React from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, TextInput, TouchableHighlight, Alert } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { StyleSheet, Text, TouchableOpacity, View, Alert } from 'react-native';
 import { RootStackParamList } from '../../types';
-import Card, { MicroFeatureCard, TitledCard, FeatureCard } from '../../components/Card';
+import Card, { MicroFeatureCard } from '../../components/Card';
 import Colors from '../../constants/Colors';
 import useColorScheme from '../../hooks/useColorScheme';
 import { Ionicons } from '@expo/vector-icons';
+import { RFValue } from "react-native-responsive-fontsize";
 
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 export default function SubscriptionScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, 'Subscription'>) {
@@ -38,7 +37,7 @@ export default function SubscriptionScreen({
       <Text style={[styles.title, { color: adColors.text }]}>Subscription</Text>
 
       {/*<Text style={[{ color: adColors.text }]}>Enjoy news stories, summarized to save you time without bias.</Text>*/}
-      
+
       <Card color={adColors.cardColor} style={{ width: "90%",maxHeight: RFValue(175), borderColor: !buyPremium ? adColors.primaryColor : adColors.background, borderWidth:  1.5}}>
       <TouchableOpacity onPress={() => { toggleBuyPremium(false) }} ><View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'transparent' }}>
@@ -46,9 +45,9 @@ export default function SubscriptionScreen({
             <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>Basic</Text>
             <Text style={{color: adColors.text}}>free forever</Text>
           </View>
-        
+
             <Ionicons name={buyPremium ? 'md-radio-button-off' : 'md-radio-button-on'} size={24} color={!buyPremium ? adColors.primaryColor : adColors.text} />
-         
+
         </View>
         <View style={[styles.separator, { backgroundColor: adColors.text }]} />
         <MicroFeatureCard content="No grocery bill splitting" iconcolor={adColors.text} icon="cart" />
@@ -65,7 +64,7 @@ export default function SubscriptionScreen({
             <Text style={{color: adColors.text}}>3 months free, then $0.99/month</Text>
           </View>
             <Ionicons name={!buyPremium ? 'md-radio-button-off' : 'md-radio-button-on'} size={24} color={buyPremium ? adColors.primaryColor : adColors.text} />
-     
+
         </View>
         <View style={[styles.separator, { backgroundColor: adColors.text }]} />
         <MicroFeatureCard content="Grocery bill splitting" iconcolor={adColors.text} icon="cart" />
@@ -82,7 +81,7 @@ export default function SubscriptionScreen({
             <Text style={{color: adColors.text}}>Use this option if your rental includes a Roomy subscription</Text>
           </View>
             <Ionicons name={!false ? 'md-radio-button-off' : 'md-radio-button-on'} size={24} color={false ? adColors.primaryColor : adColors.text} />
-     
+
         </View>
 </View>
         </TouchableOpacity>

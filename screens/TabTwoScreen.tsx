@@ -1,14 +1,10 @@
 import * as React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import Card, { FeatureCard, TitledCard } from '../components/Card';
-import EditScreenInfo from '../components/EditScreenInfo';
+import Card from '../components/Card';
 import { Text, View } from '../components/Themed';
 import Colors from '../constants/Colors';
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-
 import useColorScheme from '../hooks/useColorScheme';
-
 import { RootStackParamList } from '../types';
 
 export default function TabTwoScreen({

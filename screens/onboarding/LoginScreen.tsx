@@ -1,18 +1,14 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import * as React from 'react';
-
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, TextInput, Alert } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { StyleSheet, Text, TouchableOpacity, View, Alert } from 'react-native';
 import { RootStackParamList } from '../../types';
-import Card, { FeatureCard, TitledCard } from '../../components/Card';
+import Card, { FeatureCard } from '../../components/Card';
 import Colors from '../../constants/Colors';
 import { AsyncStorage } from "react-native";
 import * as AppleAuthentication from 'expo-apple-authentication';
 import useColorScheme from '../../hooks/useColorScheme';
-
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import { State } from 'react-native-gesture-handler';
+import { RFValue } from "react-native-responsive-fontsize";
 
 export default function LoginScreen({
   navigation,
@@ -31,8 +27,6 @@ export default function LoginScreen({
       toggleBuyPremium();
     }
     const focusListener = navigation.addListener('focus', onFocus)!
-
-
   }, []) // empty array of dependencies
 
 
@@ -63,7 +57,7 @@ export default function LoginScreen({
             });
             await AsyncStorage.setItem('credential.apple', JSON.stringify(credential));
 
-            
+
             navigation.replace('Location');
           } catch (e) {
             Alert.alert("Error", "Sign in with Apple failed.");
