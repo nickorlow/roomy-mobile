@@ -18,6 +18,7 @@ export default function SettingsScreen({
 
   const [buyPremium, setBuyPremium] = useState(true);
 
+  const [isDeveloper, setIsDeveloper] = useState(false);
   const toggleBuyPremium = (setWhat : boolean) => {
     setBuyPremium(setWhat);
   };
@@ -32,6 +33,22 @@ export default function SettingsScreen({
       navigation.replace('Home')
     }
   };
+
+  function requestApp()
+  {
+    Alert.alert("Are you sure?", "This will delete all roomy data!", [{text: "Yes", style:"destructive", onPress: resetApp}, {text: "Cancel",style: "cancel"}]);
+  }
+
+  function requestVar()
+  {
+    Alert.alert("Are you sure?", "This will delete all roomy data!", [{text: "Yes", style:"destructive", onPress: resetVars}, {text: "Cancel",style: "cancel"}]);
+  }
+
+  function resetApp()
+  {
+    resetVars();
+    navigation.replace('Welcome');
+  }
 
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
   return (
@@ -63,11 +80,25 @@ export default function SettingsScreen({
         </View></View>
         </TouchableOpacity>
       </Card>
-<OSIButton onPress={resetVars} value={"Reset Vars"} color={adColors.systemRed}/>
+      {isDeveloper &&
+      <Card color={adColors.cardColor} style={[{ width: "90%", paddingBottom: RFValue(25)}]}>
+    <View>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'transparent' }}>
+            <View>
+              <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>Developer</Text>
+              <Text style={{color: adColors.text}}>Settings used for Roomy developers.</Text>
+            </View>
+          </View></View>
+        <OSIButton onPress={requestVar} value={"Reset Vars"} color={adColors.systemRed}/>
+        <OSIButton onPress={requestApp} value={"Reset App"} color={adColors.systemRed}/>
+      </Card>}
+
+      <TouchableOpacity onLongPress={() => {setIsDeveloper(!isDeveloper)}} activeOpacity={1}>
       <View style={{marginTop:RFValue(10), alignItems: 'center', flex: 1}}>
         <Text style={{color: adColors.text}}>Roomy (Codename: Tres Amigos) v1.0</Text>
         <Text style={{color: adColors.text}}>Copyright © Orlow Software Inc</Text>
       </View>
+      </TouchableOpacity>
     </View>
   );
 }
