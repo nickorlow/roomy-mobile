@@ -28,7 +28,7 @@ export default function GroceryItem ({ item }) {
       <Text style={{fontSize: RFValue(35)}}>{'🛒'}</Text>
         <TransparentCard style={{paddingLeft: 5}}>
           <Text style={[styles.listItemTitle, {color: adColors.text}]}>{item.itemName}</Text>
-          <Text style={[{color: "grey", fontWeight: 'bold'}]}>Quantity: {item.quantity} | Cost: ${totalPrice}</Text>
+          <Text style={[{color: "grey", fontWeight: 'bold'}]}>Quantity: {item.quantity} | Total Cost: ${totalPrice}</Text>
           <Text style={[{color: "grey", fontWeight: 'bold'}]}>For {item.boughtFor}</Text>
         </TransparentCard>
       </View>
