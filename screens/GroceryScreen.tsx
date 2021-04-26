@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
   },
   title: {
-    fontSize: 35,
+    fontSize: RFValue(30),
     color: 'white',
     fontWeight: 'bold',
   },
