@@ -8,7 +8,9 @@ import GroceryCard from "../components/GroceryCard";
 import Colors from "../constants/Colors";
 
 export default function RulesScreen(rules) {
-  const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
+
+    const oadColors = useColorScheme() != "dark" ? Colors.dark : Colors.light;
+    const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
   return (
     <View style={styles.container}>
       <View
@@ -27,10 +29,10 @@ export default function RulesScreen(rules) {
           style={{ flexDirection: "row", justifyContent: "space-between" }}
         >
           <TransparentCard>
-            <Text style={[styles.title, { paddingBottom: RFValue(8) }]}>
+            <Text style={[styles.title, { paddingBottom: RFValue(8), color: oadColors.text}]}>
               House Rules
             </Text>
-            <Text style={styles.subheader}>
+            <Text style={[styles.subheader,{color: oadColors.text}]}>
               These are the agreed upon rules of the house.
             </Text>
           </TransparentCard>
