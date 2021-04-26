@@ -32,3 +32,7 @@ export type GroceryParamList = {
   GroceryParamList: undefined;
 };
 
+export type RulesParamList = {
+  RulesParamList: undefined;
+};
+

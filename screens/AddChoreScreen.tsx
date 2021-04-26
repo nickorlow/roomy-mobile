@@ -38,7 +38,7 @@ export default function AddChoreScreen(props: { isVisible: boolean, close: Funct
 
       <View style={{ padding: 10 }}>
         <Text style={styles.inputTitle}>Name</Text>
-        <OSIInput clickFunc={setName} value={name}/>
+        <OSIInput clickFunc={setName} value={name} placeholder="Chore Name"/>
         <Text style={styles.inputTitle}>Roommate</Text>
         <View style={styles.input}>
           <RNPickerSelect
