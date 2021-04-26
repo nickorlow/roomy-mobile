@@ -29,11 +29,15 @@ export default function JoinHouseScreen({
     navigation.replace('Root');
   };
 
+  const manualJoinPress = () => {
+    navigation.replace("JoinHouseManual");
+  }
+
   if (hasPermission === null) {
     return <Text>Requesting for camera permission</Text>;
   }
   if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    navigation.replace("JoinHouseManual");
   }
 
   return (
@@ -45,7 +49,7 @@ export default function JoinHouseScreen({
             style={{height: RFValue(350)}}
         />
       </View>
-      <TouchableOpacity onPress={() => {}} style={styles.link}>
+      <TouchableOpacity onPress={() => manualJoinPress()} style={styles.link}>
 
 <Text style={[{ textAlign: 'center', marginTop: 3, color: adColors.primaryColor }]}>Enter Code Manually</Text>
 
