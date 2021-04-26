@@ -25,10 +25,10 @@ export default function BottomTabNavigator() {
       <BottomTab.Screen
         name="Home"
         component={HomeNavigator}
-        options={{ 
+        options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color}/>,
         }}
-      
+
       />
       <BottomTab.Screen
         name="Chores"
@@ -42,15 +42,6 @@ export default function BottomTabNavigator() {
         component={GroceryNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="cart" color={color} />,
-        }}
-      />
-     
-
-    <BottomTab.Screen
-        name="Car"
-        component={ChoreNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="car" color={color} />,
         }}
       />
     <BottomTab.Screen
