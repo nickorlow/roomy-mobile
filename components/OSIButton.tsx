@@ -24,8 +24,8 @@ export default function OSIButton(props: { onPress: Function, value: string, col
     const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
 
     return(
-        <TouchableOpacity onPress={() => props.onPress()} onLongPress={() => {if(props.onLongPress != undefined) props.onLongPress()}} style={styles.link}>
-            <Card color={props.color} style={{ height: "100%", }}>
+        <TouchableOpacity onPress={() => props.onPress()} onLongPress={() => {if(props.onLongPress != undefined) props.onLongPress()}} style={[styles.link, props.style]}>
+            <Card color={props.color} style={{ height: RFValue(40), }}>
                 <Text style={[styles.subcontent, { textAlign: 'center', marginTop: 3 }]}>{props.value}</Text>
             </Card>
         </TouchableOpacity>
@@ -35,9 +35,6 @@ export default function OSIButton(props: { onPress: Function, value: string, col
 
 const styles = StyleSheet.create({
     link: {
-        height: 90,
-        paddingVertical: 20,
-        paddingHorizontal: 15,
         width: "100%",
     },
     subcontent: {

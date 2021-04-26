@@ -10,7 +10,7 @@ import HomeScreen from '../screens/HomeScreen';
 import { BottomTabParamList, TabOneParamList, TabTwoParamList, HomeParamList, ChoreParamList, GroceryParamList, RulesParamList } from '../types';
 import ChoresScreen from '../screens/ChoresScreen';
 import GroceryScreen from '../screens/GroceryScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import SettingsScreen from '../screens/settings/SettingsScreen';
 import RulesScreen from '../screens/RulesScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
