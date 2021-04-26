@@ -11,7 +11,7 @@ import {useEffect, useState} from "react";
 export default function JoinHouseScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, 'JoinHouse'>) {
-  const [hasPermission, setHasPermission] = useState(false);
+  const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
 
