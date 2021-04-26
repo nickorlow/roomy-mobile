@@ -25,21 +25,21 @@ export const LongCard = (props: { children: any, style?: StyleProp<ViewStyle>, c
 export const LongTitledCard = (props: { children: any, style?: StyleProp<ViewStyle>, title: string, titleColor: any, color:any }) =>
 (
   <LongCard color={props.color} style={props.style}>
-   
-      <Text style={[styles.title, {maxWidth: 250, color:props.titleColor, }]}>{props.title}</Text> 
-   
+
+      <Text style={[styles.title, {maxWidth: 250, color:props.titleColor, }]}>{props.title}</Text>
+
     {props.children}
-    
+
   </LongCard>
 );
 
 export const TitledCard = (props: { children: any, style?: StyleProp<ViewStyle>, title: string, titleColor: any, color:any }) =>
 (
   <Card color={props.color} style={props.style}>
-   
-      <Text style={[styles.title, {maxWidth: 250, color:props.titleColor}]}>{props.title}</Text> 
+
+      <Text style={[styles.title, {maxWidth: 250, color:props.titleColor}]}>{props.title}</Text>
     {props.children}
-    
+
   </Card>
 );
 
@@ -47,11 +47,11 @@ export const IconedTitledCard = (props: { children: any, style?: StyleProp<ViewS
 (
   <Card color={props.color}>
     <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'transparent'}}>
-      <Text style={[styles.title, {marginBottom:10, maxWidth: 250}]}>{props.title}</Text> 
+      <Text style={[styles.title, {marginBottom:10, maxWidth: 250}]}>{props.title}</Text>
       <Ionicons name={props.icon} size={64} color="#fff"/>
     </View>
     {props.children}
-    
+
   </Card>
 );
 
@@ -76,7 +76,7 @@ export const AllDoneCard = (props: { style?: StyleProp<ViewStyle> }) =>
 
 export const FeatureCard = (props: {title: string, content: string, icon:any, iconcolor:string, style?: StyleProp<ViewStyle> }) =>
 (
-  <View style={[props.style, { borderRadius: 15, paddingHorizontal: 30, marginHorizontal: 15, backgroundColor: "transparent", marginVertical: RFValue(15),  }]}>
+  <View style={[props.style, { borderRadius: 15, maxWidth:"95%", marginLeft: RFValue(10), backgroundColor: "transparent", marginVertical: RFValue(15),  }]}>
      <View style={{ flexDirection: 'row', justifyContent: 'flex-start', backgroundColor: "transparent" }}>
      <Ionicons name={props.icon} size={54} color={props.iconcolor}/>
      <View style={{paddingLeft:RFValue(20), paddingRight:RFValue(50), minWidth:325, backgroundColor: "transparent"}}>
