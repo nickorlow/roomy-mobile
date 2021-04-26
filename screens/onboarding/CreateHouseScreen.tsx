@@ -34,10 +34,10 @@ export default function JoinCreateHouseScreen({
         <OSIInput clickFunc={setName} value={name} placeholder="House Name"/>
 
         <Text style={[styles.inputTitle, { color: adColors.text }]}>Address</Text>
-        <OSIInput clickFunc={setAddress} value={name} placeholder="Address"/>
+        <OSIInput clickFunc={setAddress} value={address} placeholder="Address"/>
 
         <Text style={[styles.inputTitle, { color: adColors.text }]}>ZIP Code</Text>
-        <OSIInput clickFunc={setZip} value={name} placeholder="ZIP Code"/>
+        <OSIInput clickFunc={setZip} value={zip} placeholder="ZIP Code"/>
       </View>
 
       <TouchableOpacity onPress={() => continueButtonPress()} style={styles.link}>
