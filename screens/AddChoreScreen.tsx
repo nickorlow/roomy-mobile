@@ -98,9 +98,9 @@ export default function AddChoreScreen(props: { isVisible: boolean, close: Funct
           <OSIChooser clickFunc={setDuration} item="30 mins" items={[duration]} />
           <OSIChooser clickFunc={setDuration} item="1 hr +" items={[duration]} style={{ borderBottomRightRadius: 5, borderTopRightRadius: 5 }} />
         </View>
-        <OSIButton value={"Add Chore"} color={adColors.primaryColor} onPress={props.close}/>
+        
       </View>
-     
+      <OSIButton value={"Add Chore"} color={adColors.primaryColor} onPress={props.close}/>
     </Modal>
   );
 }
