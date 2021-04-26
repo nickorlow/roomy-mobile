@@ -10,7 +10,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import OSIInput from "../components/OSIInput";
 import OSIButton from "../components/OSIButton";
 
-export default function AddChoreScreen(props: { isVisible: boolean, close: Function }) {
+export default function AddGroceryScreen(props: { isVisible: boolean, close: Function }) {
 
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
 
@@ -31,14 +31,14 @@ export default function AddChoreScreen(props: { isVisible: boolean, close: Funct
     <Modal animationType={"slide"} presentationStyle="pageSheet" visible={props.isVisible} onRequestClose={() => props.close()} onDismiss={() => props.close()} style={{ backgroundColor: adColors.background }}>
 
       <View style={[{ minHeight: 100, backgroundColor: "#F59810", width: "100%", paddingTop: RFValue(25), paddingHorizontal: RFValue(10), paddingBottom: RFValue(10), flexDirection: 'row', justifyContent: 'space-between' }]}>
-        <Text style={[styles.title, { paddingBottom: RFValue(8), marginTop: RFValue(25), color: 'white' }]}>Add Chore</Text>
+        <Text style={[styles.title, { paddingBottom: RFValue(8), marginTop: RFValue(25), color: 'white' }]}>Add Grocery Item</Text>
         <Text style={{ fontSize: RFValue(75) }}>{emoji}</Text>
       </View>
 
 
       <View style={{ padding: 10 }}>
         <Text style={styles.inputTitle}>Name</Text>
-        <OSIInput clickFunc={setName} value={name} placeholder="Chore Name"/>
+        <OSIInput clickFunc={setName} value={name} placeholder="Grocery Name"/>
         <Text style={styles.inputTitle}>Roommate</Text>
         <View style={styles.input}>
           <RNPickerSelect
@@ -93,14 +93,13 @@ export default function AddChoreScreen(props: { isVisible: boolean, close: Funct
 
         <Text style={styles.inputTitle}>Length</Text>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', backgroundColor: 'rgba(200,200,200,.75)', borderRadius: 10 }}>
-          <OSIChooser clickFunc={setDuration} item="5 mins" items={[duration]} style={{ borderBottomLeftRadius: 5, borderTopLeftRadius: 5 }} />
-          <OSIChooser clickFunc={setDuration} item="15 mins" items={[duration]} />
-          <OSIChooser clickFunc={setDuration} item="30 mins" items={[duration]} />
-          <OSIChooser clickFunc={setDuration} item="1 hr +" items={[duration]} style={{ borderBottomRightRadius: 5, borderTopRightRadius: 5 }} />
+          <OSIChooser clickFunc={setDuration} item="5 minutes" items={[duration]} style={{ borderBottomLeftRadius: 5, borderTopLeftRadius: 5 }} />
+          <OSIChooser clickFunc={setDuration} item="15 minutes" items={[duration]} />
+          <OSIChooser clickFunc={setDuration} item="30 minutes" items={[duration]} />
+          <OSIChooser clickFunc={setDuration} item="1 Hour +" items={[duration]} style={{ borderBottomRightRadius: 5, borderTopRightRadius: 5 }} />
         </View>
-        <OSIButton value={"Add Chore"} color={adColors.primaryColor} onPress={props.close}/>
       </View>
-     
+     <OSIButton value={"Add Grocery"} color={adColors.primaryColor} onPress={props.close}/>
     </Modal>
   );
 }
