@@ -5,17 +5,45 @@ import { RootStackParamList } from '../../types';
 import Colors from '../../constants/Colors';
 import { RFValue } from "react-native-responsive-fontsize";
 import useColorScheme from '../../hooks/useColorScheme';
+import { BarCodeScanner } from 'expo-barcode-scanner';
+import {useEffect, useState} from "react";
 
 export default function JoinHouseScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, 'JoinHouse'>) {
+  const [hasPermission, setHasPermission] = useState(false);
+  const [scanned, setScanned] = useState(false);
+
 
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
+  useEffect(() => {
+    (async () => {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      setHasPermission(status === 'granted');
+    })();
+  }, []);
+
+  const handleBarCodeScanned = ({ type, data }) => {
+    setScanned(true);
+    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    navigation.replace('Root');
+  };
+
+  if (hasPermission === null) {
+    return <Text>Requesting for camera permission</Text>;
+  }
+  if (hasPermission === false) {
+    return <Text>No access to camera</Text>;
+  }
+
   return (
     <View style={styles.container}>
       <View style={{ marginTop: RFValue(200), paddingBottom: RFValue(250), height: "100%" }}>
         <Text style={[styles.title, { color: adColors.text, textAlign: 'center', marginBottom: RFValue(30) }]}>Scan the Roomy House Code</Text>
-          {/*<QRCodeScanner />*/}
+        <BarCodeScanner
+            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+            style={{height: RFValue(350)}}
+        />
       </View>
       <TouchableOpacity onPress={() => {}} style={styles.link}>
 
