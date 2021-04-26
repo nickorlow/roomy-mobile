@@ -6,15 +6,16 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import Colors from '../constants/Colors';
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
+import { useLinkProps } from '@react-navigation/native';
 
-export default function OSIInput(props: { clickFunc: Function, value: string, style?:StyleProp<ViewStyle>}) {
+export default function OSIInput(props: { clickFunc: Function, value: string, placeholder: string, style?:StyleProp<ViewStyle>}) {
     const [, updateState] = React.useState();
     const forceUpdate = React.useCallback(() => updateState({}), []);
     return(
         <TextInput
             style={[styles.input, props.style]}
             value={props.value}
-            placeholder="Chore Name"
+            placeholder={props.placeholder}
             onChangeText={(e) => { props.clickFunc(e) }}
         />
     );
