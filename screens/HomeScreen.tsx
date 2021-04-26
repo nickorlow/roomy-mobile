@@ -27,6 +27,7 @@ export default function HomeScreen() {
          <Ionicons name="moon" color={oadColors.text} size={24}/>
         <Text style={[styles.subheader, {paddingTop:RFValue(3), paddingLeft: RFValue(10), color: oadColors.text}]}>It is currently quiet hours</Text>
        </TransparentCard>
+
      </View>
         <ScrollView style={[{ width: "100%", height: "100%" }]}>
           <View style={styles.container}>
