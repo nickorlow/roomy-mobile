@@ -1,7 +1,7 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import * as React from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import { RootStackParamList } from '../../types';
 import Card from '../../components/Card';
 import Colors from '../../constants/Colors';
@@ -13,13 +13,18 @@ export default function JoinCreateHouseScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, 'JoinCreateHouse'>) {
 
-  const [create, setSentNotifs] = useState(true);
+  const [create, setSentNotifs] = useState(null);
 
   const setCreate = (setWhat : boolean) => {
     setSentNotifs(setWhat);
   };
 
   const continueButtonPress = () => {
+    if(create === null)
+    {
+      Alert.alert("Oops!", "Please pick an option!");
+      return;
+    }
     if(!create)
     {
       navigation.replace('JoinHouse');
@@ -50,14 +55,14 @@ export default function JoinCreateHouseScreen({
         </TouchableOpacity>
       </Card>
 
-      <Card color={adColors.cardColor} style={[{ width: "90%",maxHeight: RFValue(175), borderColor: !create ? adColors.primaryColor : adColors.background, borderWidth:1.5 }]}>
+      <Card color={adColors.cardColor} style={[{ width: "90%",maxHeight: RFValue(175), borderColor: create != null && !create ? adColors.primaryColor : adColors.background, borderWidth:1.5 }]}>
       <TouchableOpacity onPress={() => { setCreate(false) }}><View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'transparent' }}>
           <View>
             <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>Join a House</Text>
             <Text style={{color: adColors.text}}>Join a house that has already been created</Text>
           </View>
-            <Ionicons name={create ? 'md-radio-button-off' : 'md-radio-button-on'} size={24} color={!create ? adColors.primaryColor : adColors.text} />
+            <Ionicons name={create == null || create ? 'md-radio-button-off' : 'md-radio-button-on'} size={24} color={create != null && !create ? adColors.primaryColor : adColors.text} />
 
         </View>
 </View>
