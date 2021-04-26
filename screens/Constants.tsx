@@ -38,6 +38,9 @@ var placeholderItems = [
     { itemName: "Carrots", unitCost: 0.50, quantity: 5, isBought: true, boughtFor: "the House" },
 ]
 
+var placeholderRules = [
+    { title: "Eggs", description: "No egging other people" },
+]
 export function getChores() {
     placeholderChores.sort((a: Chore, b: Chore) => {
         return a.date.valueOf() - b.date.valueOf();

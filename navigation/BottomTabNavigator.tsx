@@ -7,10 +7,11 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import HomeScreen from '../screens/HomeScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList, HomeParamList, ChoreParamList, GroceryParamList } from '../types';
+import { BottomTabParamList, TabOneParamList, TabTwoParamList, HomeParamList, ChoreParamList, GroceryParamList, RulesParamList } from '../types';
 import ChoresScreen from '../screens/ChoresScreen';
 import GroceryScreen from '../screens/GroceryScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import RulesScreen from '../screens/RulesScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -50,6 +51,13 @@ export default function BottomTabNavigator() {
         component={ChoreNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="car" color={color} />,
+        }}
+      />
+    <BottomTab.Screen
+        name="Rules"
+        component={RulesNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="document-text" color={color} />,
         }}
       />
 
@@ -140,6 +148,20 @@ function GroceryNavigator() {
         options={{ headerTitle: 'Grocery', headerShown: false}}
       />
     </GroceryStack.Navigator>
+  );
+}
+
+const RulesStack = createStackNavigator<RulesParamList>();
+
+function RulesNavigator() {
+  return (
+    <RulesStack.Navigator>
+      <RulesStack.Screen
+        name="RulesScreen"
+        component={RulesScreen}
+        options={{ headerTitle: 'Rules', headerShown: false}}
+      />
+    </RulesStack.Navigator>
   );
 }
 
