@@ -16,8 +16,9 @@ export default function AddGroceryScreen(props: { isVisible: boolean, close: Fun
 
   const [emoji, setEmoji] = useState("🧹");
   const [days, setDays] = useState(['Monday']);
+  const [quantity, setQuantity] = useState('1');
   const [duration, setDuration] = useState('1 - 5 Minutes');
-  const [repetetion, setRepetetion] = useState('Daily');
+  const [unitCost, setUnitCost] = useState('3.00');
   const [name, setName] = useState('');
   const [person, setPerson] = useState('');
   function addDay(day: string) {
@@ -37,9 +38,9 @@ export default function AddGroceryScreen(props: { isVisible: boolean, close: Fun
 
 
       <View style={{ padding: 10 }}>
-        <Text style={styles.inputTitle}>Name</Text>
+        <Text style={styles.inputTitle}>Item Name</Text>
         <OSIInput clickFunc={setName} value={name} placeholder="Grocery Name"/>
-        <Text style={styles.inputTitle}>Roommate</Text>
+        <Text style={styles.inputTitle}>Item For</Text>
         <View style={styles.input}>
           <RNPickerSelect
             onValueChange={(value) => console.log(value)}
@@ -47,57 +48,24 @@ export default function AddGroceryScreen(props: { isVisible: boolean, close: Fun
               { label: 'Saul Goodman', value: 'football' },
               { label: 'Walter White', value: 'baseball' },
               { label: 'Nicholas Orlowsky', value: 'hockey' },
+              { label: 'For the House', value: 'house' },
             ]}
             style={{ inputIOS: { marginTop: RFValue(7) } }} />
         </View>
 
         <Text style={styles.inputTitle}>Icon</Text>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center' }}>
-          <EmojiButton clickFunc={setEmoji} currentEmoji={emoji} emoji='🧑‍🍳' />
-          <EmojiButton clickFunc={setEmoji} currentEmoji={emoji} emoji='🧹' />
+          <EmojiButton clickFunc={setEmoji} currentEmoji={emoji} emoji='🧽' />
           <EmojiButton clickFunc={setEmoji} currentEmoji={emoji} emoji='🚘' />
-          <EmojiButton clickFunc={setEmoji} currentEmoji={emoji} emoji='💵' />
+          <EmojiButton clickFunc={setEmoji} currentEmoji={emoji} emoji='👖' />
           <EmojiButton clickFunc={setEmoji} currentEmoji={emoji} emoji='🛒' />
-          <EmojiButton clickFunc={setEmoji} currentEmoji={emoji} emoji='🐾' />
+          <EmojiButton clickFunc={setEmoji} currentEmoji={emoji} emoji='🖥️' />
           <EmojiButton clickFunc={setEmoji} currentEmoji={emoji} emoji='🛠️' />
         </View>
-
-        <Text style={styles.inputTitle}>Start</Text>
-
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={new Date(1598051730000)}
-          mode="datetime"
-          is24Hour={true}
-          display="default"
-          style={{ marginLeft: RFPercentage(13.5) }}
-          onChange={() => { }}
-        />
-        <Text style={styles.inputTitle}>Repeats</Text>
-        <View style={styles.input}>
-          <RNPickerSelect
-            onValueChange={(value) => console.log(value)}
-            items={[
-              { label: 'Never', value: 'never' },
-              { label: 'Daily', value: 'daily' },
-              { label: 'Every other day', value: 'halfdaily' },
-              { label: 'Bi-Weekly', value: 'biweekly' },
-              { label: 'Weekly', value: 'weekly' },
-              { label: 'Bi-Monthly', value: 'bimonthly' },
-              { label: 'Monthly', value: 'monthly' },
-            ]}
-            style={{ inputIOS: { marginTop: RFValue(7) } }} />
-        </View>
-
-
-
-        <Text style={styles.inputTitle}>Length</Text>
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', backgroundColor: 'rgba(200,200,200,.75)', borderRadius: 10 }}>
-          <OSIChooser clickFunc={setDuration} item="5 minutes" items={[duration]} style={{ borderBottomLeftRadius: 5, borderTopLeftRadius: 5 }} />
-          <OSIChooser clickFunc={setDuration} item="15 minutes" items={[duration]} />
-          <OSIChooser clickFunc={setDuration} item="30 minutes" items={[duration]} />
-          <OSIChooser clickFunc={setDuration} item="1 Hour +" items={[duration]} style={{ borderBottomRightRadius: 5, borderTopRightRadius: 5 }} />
-        </View>
+        <Text style={styles.inputTitle}>Quantity</Text>
+        <OSIInput clickFunc={setQuantity} value={quantity} placeholder="Quantity"/>
+        <Text style={styles.inputTitle}>Unit Cost</Text>
+        <OSIInput clickFunc={setUnitCost} value={unitCost} placeholder="Unit Cost"/>
       </View>
      <OSIButton value={"Add Grocery"} color={adColors.primaryColor} onPress={props.close}/>
     </Modal>

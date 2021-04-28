@@ -10,6 +10,7 @@ import useColorScheme from "../hooks/useColorScheme";
 import Colors from "../constants/Colors";
 import {useIsFocused} from "@react-navigation/native";
 import GroceryItem from "../screens/GroceryListItem";
+import AddGroceryScreen from "../screens/AddGroceryScreen";
 
 export default function GroceryCard() {
 
@@ -36,6 +37,7 @@ export default function GroceryCard() {
 
     return (
         <LongCard color={adColors.cardColor}>
+            <AddGroceryScreen isVisible={isVisible} close={() => setVisible(false)}/>
             <View style={{ flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'space-between'}} >
                 <TransparentCard>
                     <Text style={[styles.title, {maxWidth: 250, color:adColors.text }]}>Items to Buy</Text>
