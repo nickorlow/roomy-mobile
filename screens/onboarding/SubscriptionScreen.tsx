@@ -73,20 +73,6 @@ export default function SubscriptionScreen({
         </TouchableOpacity>
       </Card>
 
-      <Card color={adColors.cardColor} style={[{ width: "90%",maxHeight: RFValue(175), borderColor: false ? adColors.primaryColor : adColors.background, borderWidth:1.5 }]}>
-      <TouchableOpacity onPress={() => { toggleBuyPremium(true) }}><View>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'transparent' }}>
-          <View>
-            <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>Included in Rent</Text>
-            <Text style={{color: adColors.text}}>Use this option if your rental includes a Roomy subscription</Text>
-          </View>
-            <Ionicons name={!false ? 'md-radio-button-off' : 'md-radio-button-on'} size={24} color={false ? adColors.primaryColor : adColors.text} />
-
-        </View>
-</View>
-        </TouchableOpacity>
-      </Card>
-
 
       <TouchableOpacity onPress={() => continueButtonPress()} style={styles.link}>
         <Card color={adColors.primaryColor} style={{ height: "100%", }}>

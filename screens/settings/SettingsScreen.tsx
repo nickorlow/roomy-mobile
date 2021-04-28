@@ -1,17 +1,17 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import * as React from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, TextInput, TouchableHighlight, Alert } from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View, TextInput, TouchableHighlight, Alert, ScrollView} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { RootStackParamList } from '../types';
-import Card, { MicroFeatureCard, TitledCard, FeatureCard } from '../components/Card';
-import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme';
+import { RootStackParamList } from '../../types';
+import Card, { MicroFeatureCard, TitledCard, FeatureCard } from '../../components/Card';
+import Colors from '../../constants/Colors';
+import useColorScheme from '../../hooks/useColorScheme';
 import { Ionicons } from '@expo/vector-icons';
 
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import OSIButton from "../components/OSIButton";
-import {resetVars} from "./Constants";
+import OSIButton from "../../components/OSIButton";
+import {resetVars} from "../Constants";
 export default function SettingsScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, 'Settings'>) {
@@ -52,10 +52,13 @@ export default function SettingsScreen({
 
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
   return (
-    <View style={styles.container}>
-      <Card color={adColors.cardColor} style={{ width: "90%",maxHeight: RFValue(175)}}>
+
+      <ScrollView>
+        <View style={styles.container}>
+      <Card color={adColors.cardColor} style={{ width: "90%",paddingBottom: RFValue(15)}}>
       <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>Nicholas Orlowsky</Text>
         <Text style={{color: adColors.text}}>Member since March 29th, 2021</Text>
+        <OSIButton onPress={requestApp} value={"Log Out"} color={adColors.systemRed} style={{marginTop: 0}}/>
       </Card>
 
 
@@ -70,14 +73,18 @@ export default function SettingsScreen({
         </TouchableOpacity>
       </Card>
 
-      <Card color={adColors.cardColor} style={[{ width: "90%",maxHeight: RFValue(175) }]}>
+      <Card color={adColors.cardColor} style={[{ width: "90%", paddingBottom: RFValue(25) }]}>
       <TouchableOpacity onPress={() => { toggleBuyPremium(true) }}><View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'transparent' }}>
           <View>
-            <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>Houehold</Text>
+            <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>House</Text>
             <Text style={{color: adColors.text}}>Member of Casa de Federighi</Text>
           </View>
+
         </View></View>
+        <OSIButton onPress={requestVar} value={"Change House Name"} color={adColors.primaryColor}/>
+        <OSIButton onPress={requestVar} value={"Show Roomy Code"} color={adColors.primaryColor}/>
+        <OSIButton onPress={requestVar} value={"Leave House"} color={adColors.systemRed}/>
         </TouchableOpacity>
       </Card>
       {isDeveloper &&
@@ -99,7 +106,9 @@ export default function SettingsScreen({
         <Text style={{color: adColors.text}}>Copyright © Orlow Software Inc</Text>
       </View>
       </TouchableOpacity>
-    </View>
+        </View>
+      </ScrollView>
+
   );
 }
 

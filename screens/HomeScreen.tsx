@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent"
   },
   title: {
-    fontSize: 35,
+    fontSize: RFValue(30),
     color: 'white',
     fontWeight: 'bold',
   },
