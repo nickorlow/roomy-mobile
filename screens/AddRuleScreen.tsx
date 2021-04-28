@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Modal, useColorScheme, TextInput } from 'react-native';
 import { Text, View } from '../components/Themed';
 import Colors from '../constants/Colors';
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import EmojiButton from '../components/EmojiButton';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import OSIChooser from '../components/OSIChooser';
-import RNPickerSelect from 'react-native-picker-select';
+import { RFValue } from "react-native-responsive-fontsize";
 import OSIInput from "../components/OSIInput";
 import OSIButton from "../components/OSIButton";
 
@@ -14,8 +10,9 @@ export default function AddGroceryScreen(props: { isVisible: boolean, close: Fun
 
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
 
-  const [days, setDays] = useState(['Monday']);
   const [name, setName] = useState('');
+  const [desc, setDesc] = useState('');
+
   return (
     <Modal animationType={"slide"} presentationStyle="pageSheet" visible={props.isVisible} onRequestClose={() => props.close()} onDismiss={() => props.close()} style={{ backgroundColor: adColors.background }}>
 
@@ -29,7 +26,7 @@ export default function AddGroceryScreen(props: { isVisible: boolean, close: Fun
         <Text style={styles.inputTitle}>Rule Name</Text>
         <OSIInput clickFunc={setName} value={name} placeholder="Rule Name"/>
         <Text style={styles.inputTitle}>Rule Description</Text>
-        <TextInput multiline numberOfLines={4} style={styles.input} />
+        <TextInput multiline numberOfLines={4} style={styles.input} value={desc} />
       </View>
      <OSIButton value={"Add Rule"} color={adColors.primaryColor} onPress={props.close}/>
     </Modal>

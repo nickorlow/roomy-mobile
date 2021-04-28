@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { StyleSheet, Modal, useColorScheme } from 'react-native';
 import { Text, View } from '../components/Themed';
 import Colors from '../constants/Colors';
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { RFValue } from "react-native-responsive-fontsize";
 import EmojiButton from '../components/EmojiButton';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import OSIChooser from '../components/OSIChooser';
 import RNPickerSelect from 'react-native-picker-select';
 import OSIInput from "../components/OSIInput";
 import OSIButton from "../components/OSIButton";
@@ -14,19 +12,10 @@ export default function AddGroceryScreen(props: { isVisible: boolean, close: Fun
 
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
 
-  const [emoji, setEmoji] = useState("🧹");
-  const [days, setDays] = useState(['Monday']);
+  const [emoji, setEmoji] = useState("🧽");
   const [quantity, setQuantity] = useState('1');
-  const [duration, setDuration] = useState('1 - 5 Minutes');
   const [unitCost, setUnitCost] = useState('3.00');
   const [name, setName] = useState('');
-  const [person, setPerson] = useState('');
-  function addDay(day: string) {
-    var localDays: string[] = days;
-    localDays.indexOf(day) == -1 ? localDays.push(day) : delete localDays[localDays.indexOf(day)];
-    setDays([]);
-    setDays(localDays);
-  }
 
   return (
     <Modal animationType={"slide"} presentationStyle="pageSheet" visible={props.isVisible} onRequestClose={() => props.close()} onDismiss={() => props.close()} style={{ backgroundColor: adColors.background }}>
