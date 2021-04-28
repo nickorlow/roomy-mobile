@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
 import { LongCard, TransparentCard } from "../components/Card";
 import { Text, View } from "../components/Themed";
 import { ScrollView } from "react-native-gesture-handler";
 import { RFValue } from "react-native-responsive-fontsize";
-import GroceryCard from "../components/GroceryCard";
 import Colors from "../constants/Colors";
+import OSIButton from "../components/OSIButton";
+import AddRuleScreen from "../screens/AddRuleScreen";
 
 export default function RulesScreen(rules) {
-
+    const [isVisible, setVisible] = useState(false);
     const oadColors = useColorScheme() != "dark" ? Colors.dark : Colors.light;
     const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
   return (
@@ -41,6 +42,7 @@ export default function RulesScreen(rules) {
       <ScrollView style={[{ width: "100%", height: "100%" }]}>
         <View style={styles.container}>
           <LongCard color={adColors.cardColor}>
+          <AddRuleScreen isVisible={isVisible} close={() => setVisible(false)}/>
             <View
               style={{
                 flexDirection: "row",
@@ -131,6 +133,7 @@ export default function RulesScreen(rules) {
             </View>
           </LongCard>
         </View>
+        <OSIButton value={"Add Rule"} color={adColors.primaryColor} onPress={() => {setVisible(true)}}/>
       </ScrollView>
     </View>
   );
