@@ -12,12 +12,9 @@ import OSIInput from '../../components/OSIInput';
 
 export default function JoinCreateHouseScreen({
   navigation,
-}: StackScreenProps<RootStackParamList, 'CreateHouse'>) {
+}: StackScreenProps<RootStackParamList, 'JoinHouseManualHouse'>) {
 
-  const [name, setName] = useState('');
-  const [address, setAddress] = useState('');
-  const [zip, setZip] = useState('');
-  
+  const [code, setCode] = useState('');
 
   const continueButtonPress = () => {
     navigation.replace('Root');
@@ -27,17 +24,12 @@ export default function JoinCreateHouseScreen({
   return (
     <View style={styles.container}>
       <Ionicons name="home" size={54} color={adColors.primaryColor} />
-      <Text style={[styles.title, { color: adColors.text }]}>Create a House</Text>
+      <Text style={[styles.title, { color: adColors.text }]}>Join a House</Text>
 
       <View style={{ padding: 10, width: '90%' }}>
-        <Text style={[styles.inputTitle, { color: adColors.text }]}>House Name</Text>
-        <OSIInput clickFunc={setName} value={name} placeholder="House Name"/>
+        <Text style={[styles.inputTitle, { color: adColors.text }]}>Enter the Code</Text>
+        <OSIInput clickFunc={setCode} value={code} placeholder="Code"/>
 
-        <Text style={[styles.inputTitle, { color: adColors.text }]}>Address</Text>
-        <OSIInput clickFunc={setAddress} value={address} placeholder="Address"/>
-
-        <Text style={[styles.inputTitle, { color: adColors.text }]}>ZIP Code</Text>
-        <OSIInput clickFunc={setZip} value={zip} placeholder="ZIP Code"/>
       </View>
 
       <TouchableOpacity onPress={() => continueButtonPress()} style={styles.link}>

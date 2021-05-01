@@ -93,13 +93,14 @@ export default function AddChoreScreen(props: { isVisible: boolean, close: Funct
 
         <Text style={styles.inputTitle}>Length</Text>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', backgroundColor: 'rgba(200,200,200,.75)', borderRadius: 10 }}>
-          <OSIChooser clickFunc={setDuration} item="5 minutes" items={[duration]} style={{ borderBottomLeftRadius: 5, borderTopLeftRadius: 5 }} />
-          <OSIChooser clickFunc={setDuration} item="15 minutes" items={[duration]} />
-          <OSIChooser clickFunc={setDuration} item="30 minutes" items={[duration]} />
-          <OSIChooser clickFunc={setDuration} item="1 Hour +" items={[duration]} style={{ borderBottomRightRadius: 5, borderTopRightRadius: 5 }} />
+          <OSIChooser clickFunc={setDuration} item="5 mins" items={[duration]} style={{ borderBottomLeftRadius: 5, borderTopLeftRadius: 5 }} />
+          <OSIChooser clickFunc={setDuration} item="15 mins" items={[duration]} />
+          <OSIChooser clickFunc={setDuration} item="30 mins" items={[duration]} />
+          <OSIChooser clickFunc={setDuration} item="1 hr +" items={[duration]} style={{ borderBottomRightRadius: 5, borderTopRightRadius: 5 }} />
         </View>
+        
       </View>
-     <OSIButton value={"Add Chore"} color={adColors.primaryColor} onPress={props.close}/>
+      <OSIButton value={"Add Chore"} color={adColors.primaryColor} onPress={props.close}/>
     </Modal>
   );
 }
