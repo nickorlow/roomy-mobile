@@ -81,7 +81,6 @@ export default function AddChoreScreen(props: { isVisible: boolean, close: Funct
               { label: 'Never', value: 'never' },
               { label: 'Daily', value: 'daily' },
               { label: 'Every other day', value: 'halfdaily' },
-              { label: 'Bi-Weekly', value: 'biweekly' },
               { label: 'Weekly', value: 'weekly' },
               { label: 'Bi-Monthly', value: 'bimonthly' },
               { label: 'Monthly', value: 'monthly' },
