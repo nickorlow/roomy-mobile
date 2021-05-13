@@ -4,7 +4,7 @@ import {Alert, StyleSheet, TouchableOpacity} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 import * as React from "react";
 import {useEffect, useState} from "react";
-import ChoreItem from "../screens/ChoreListItem";
+import ChoreItem from "./ChoreListItem";
 import useColorScheme from "../hooks/useColorScheme";
 import Colors from "../constants/Colors";
 import {useIsFocused} from "@react-navigation/native";

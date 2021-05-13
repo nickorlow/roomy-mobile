@@ -11,7 +11,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import OSIButton from "../../components/OSIButton";
-import {resetVars} from "../Constants";
+import {resetVars} from "../../roomy-api/ApiFunctions";
 export default function SettingsScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, 'Settings'>) {
