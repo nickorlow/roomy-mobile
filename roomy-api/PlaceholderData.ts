@@ -1,4 +1,4 @@
-import {Chore, GroceryItem, User} from "./Types";
+import {Chore, GroceryItem, Rule, User} from "./Types";
 
 export var initPlaceholderUser: User = {
     id: "6e2d99f6-31ad-4a12-88d2-0f45479eea6f",
@@ -149,9 +149,25 @@ export var initPlaceholderItems: GroceryItem[] = [
     },
 ];
 
-export var initPlaceholderRules = [
+export var initPlaceholderRules: Rule[] = [
     {
-        title: "Eggs",
-        description: "No egging other people"
+        title: "Don't talk about fight club",
+        description: "It's literally the first rule of fight club."
+    },
+    {
+        title: "Don't talk about fight club",
+        description: "It's literally the second rule of fight club."
+    },
+    {
+        title: "Newton's First Law",
+        description: "An object in motion stays in motion until acted upon by an outside force."
+    },
+    {
+        title: "Newton's Second Law",
+        description: "Force is equal to the mass of an object multiplied by the acceleration of that object."
+    },
+    {
+        title: "Newton's Third Law",
+        description: "For every action, there is an equal and opposite reaction."
     },
 ];

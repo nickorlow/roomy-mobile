@@ -1,7 +1,7 @@
-import {Chore, GroceryItem, User,  UserCreationResponse} from './Types'
+import {Chore, GroceryItem, Rule, User, UserCreationResponse} from './Types'
 import {
     initPlaceholderChores,
-    initPlaceholderItems,
+    initPlaceholderItems, initPlaceholderRules,
     initPlaceholderUser,
     initPlaceholderUsers
 } from "./PlaceholderData";
@@ -10,7 +10,7 @@ var chores: Chore[] = [];
 
 var groceryItems: GroceryItem[] = [];
 
-var rules = [];
+var rules: Rule[] = [];
 
 var currentUser: User;
 
@@ -78,9 +78,16 @@ export function getUser(userId: string) {
     });
 }
 
+// SECTION: Rule ----------------------------------
+export function getRules() {
+    return rules;
+}
+
 // SECTION: Developer/Debug ----------------------------------
 export function resetVars() {
     chores = initPlaceholderChores;
     currentUser = initPlaceholderUser;
     groceryItems = initPlaceholderItems;
+    rules = initPlaceholderRules;
+    console.log(rules);
 }

@@ -15,6 +15,11 @@ export type Chore = {
     date: Date
 };
 
+export type Rule = {
+    title: string,
+    description: string
+};
+
 export type User = {
     id: string,
     firstName: string,
