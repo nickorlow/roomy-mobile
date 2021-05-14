@@ -4,14 +4,15 @@ import { useState } from 'react';
 import {StyleSheet, Text, TouchableOpacity, View, TextInput, TouchableHighlight, Alert, ScrollView} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { RootStackParamList } from '../../types';
-import Card, { MicroFeatureCard, TitledCard, FeatureCard } from '../../components/Card';
+import Card, {MicroFeatureCard, TitledCard, FeatureCard, LongCard} from '../../components/Card';
 import Colors from '../../constants/Colors';
 import useColorScheme from '../../hooks/useColorScheme';
 import { Ionicons } from '@expo/vector-icons';
 
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import OSIButton from "../../components/OSIButton";
-import {resetVars} from "../../roomy-api/ApiFunctions";
+import {currentUser, resetVars} from "../../roomy-api/ApiFunctions";
+import PremiumCard from "../../components/PremiumCard";
 export default function SettingsScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, 'Settings'>) {
@@ -56,21 +57,21 @@ export default function SettingsScreen({
       <ScrollView>
         <View style={styles.container}>
       <Card color={adColors.cardColor} style={{ width: "90%",paddingBottom: RFValue(15)}}>
-      <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>Nicholas Orlowsky</Text>
-        <Text style={{color: adColors.text}}>Member since March 29th, 2021</Text>
+      <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>{currentUser.firstName + " " + currentUser.lastName}</Text>
+        <Text style={{color: adColors.text}}>Member since {currentUser.createdDate.toDateString()}</Text>
         <OSIButton onPress={requestApp} value={"Log Out"} color={adColors.systemRed} style={{marginTop: 0}}/>
       </Card>
 
 
-      <Card color={adColors.cardColor} style={[{ width: "90%",maxHeight: RFValue(175) }]}>
-      <TouchableOpacity onPress={() => { toggleBuyPremium(true) }}><View>
+      <Card color={adColors.cardColor} style={[{ width: "90%", maxHeight: RFValue(315), paddingBottom: RFValue(25)}]}><View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'transparent' }}>
           <View>
-            <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>Premium</Text>
-            <Text style={{color: adColors.text}}>Renews on April 29th, 2021</Text>
+            <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>{currentUser.subscriptionExpirationDate > new Date() ? "Premium" : "Basic"}</Text>
+            <Text style={{color: adColors.text}}>{currentUser.subscriptionExpirationDate > new Date() ? "Ends/Renews on " : "Expired on"}{currentUser.subscriptionExpirationDate.toDateString()}</Text>
+            {currentUser.subscriptionExpirationDate > new Date() && <Text style={{color: adColors.text}}>You may cancel your subscription via the App Store</Text>}
+            {currentUser.subscriptionExpirationDate > new Date() || <PremiumCard/>}
           </View>
         </View></View>
-        </TouchableOpacity>
       </Card>
 
       <Card color={adColors.cardColor} style={[{ width: "90%", paddingBottom: RFValue(25) }]}>
