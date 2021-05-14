@@ -31,7 +31,7 @@ export default function ChoreCard(props: {listFunction: Function, title: string}
 
     return (
         <LongCard color={adColors.cardColor}>
-            <AddChoreScreen isVisible={isVisible} close={() => setVisible(false)}/>
+            <AddChoreScreen isVisible={isVisible} close={() => {setVisible(false); useForceUpdate();}}/>
             <View style={{ flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'space-between'}} >
                 <TransparentCard>
                     <Text style={[styles.title, {maxWidth: 250, color:adColors.text }]}>{props.title}</Text>

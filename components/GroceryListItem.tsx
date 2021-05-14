@@ -10,7 +10,7 @@ import {getUser} from "../roomy-api/ApiFunctions";
 
 
 
-export default function GroceryListItem (props: {item: GroceryItem }) {
+export default function GroceryListItem (props: {item: GroceryItem, key: number  }) {
 
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
     const [isVisible, setVisible] = useState(false);

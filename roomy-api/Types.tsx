@@ -12,7 +12,9 @@ export type Chore = {
     userId: string,
     name: string,
     emoji: string,
-    date: Date
+    date: Date,
+    repeats: string | null,
+    duration: string | null
 };
 
 export type Rule = {

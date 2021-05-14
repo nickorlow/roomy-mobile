@@ -6,7 +6,7 @@ import {Rule} from "../roomy-api/Types";
 import {StyleSheet, useColorScheme} from "react-native";
 import Colors from "../constants/Colors";
 
-export default function RuleCard(props: {rule: Rule}) {
+export default function RuleCard(props: {rule: Rule, key: number }) {
 
     const [isVisible, setVisible] = useState(false);
     const oadColors = useColorScheme() != "dark" ? Colors.dark : Colors.light;

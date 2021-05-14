@@ -12,6 +12,8 @@ var groceryItems: GroceryItem[] = [];
 
 var rules: Rule[] = [];
 
+var roomies: User[] = [];
+
 var currentUser: User;
 
 
@@ -54,8 +56,9 @@ export function getHomeChores() {
     return list;
 }
 
-export function addChore() {
-
+export function addChore(chore: Chore) {
+    // TODO: Add server calls
+    chores.push(chore);
 }
 
 // SECTION: Groceries ----------------------------------
@@ -78,6 +81,10 @@ export function getUser(userId: string) {
     });
 }
 
+export function getRoomies() {
+    return roomies;
+}
+
 // SECTION: Rule ----------------------------------
 export function getRules() {
     return rules;
@@ -89,5 +96,6 @@ export function resetVars() {
     currentUser = initPlaceholderUser;
     groceryItems = initPlaceholderItems;
     rules = initPlaceholderRules;
+    roomies = initPlaceholderUsers;
     console.log(rules);
 }

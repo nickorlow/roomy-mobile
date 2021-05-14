@@ -14,7 +14,7 @@ import {getUser} from "../roomy-api/ApiFunctions";
 
 
 
-export default function ChoreItem (props: { chore: Chore, closeFunc: Function }) {
+export default function ChoreItem (props: { chore: Chore, closeFunc: Function, key: number }) {
 
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
     const [isVisible, setVisible] = useState(false);

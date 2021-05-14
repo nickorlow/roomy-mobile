@@ -6,9 +6,9 @@ export var initPlaceholderUser: User = {
     lastName: "Orlowsky",
     authProvider: "apple",
     authKey: "",
-    createdDate: new Date(1618941338), // 4/20/21
+    createdDate: new Date(new Date().setMonth(new Date().getMonth() - 3)),
     emailAddress: "nicholasorlowsky@gmail.com",
-    subscriptionExpirationDate: new Date(1818961338), // 4/22/27,
+    subscriptionExpirationDate: new Date(new Date().setMonth(new Date().getMonth() + 3)),
     isPremium: new Date() < this.subscriptionExpirationDate,
     homeId: "460127fe-0f2f-48b7-a12d-dfe6b238e441",
 }
@@ -21,9 +21,9 @@ export var initPlaceholderUsers: User[] =
             lastName: "Hammock",
             authProvider: "apple",
             authKey: "",
-            createdDate: new Date(1618941338), // 4/20/21
+            createdDate:new Date(new Date().setMonth(new Date().getMonth() - 3)),
             emailAddress: "carson@orlowsoft.com",
-            subscriptionExpirationDate: new Date(1818961338), // 4/22/27,
+            subscriptionExpirationDate:new Date(new Date().setMonth(new Date().getMonth() + 3)),
             isPremium: new Date() < this.subscriptionExpirationDate,
             homeId: "460127fe-0f2f-48b7-a12d-dfe6b238e441",
         },
@@ -33,9 +33,9 @@ export var initPlaceholderUsers: User[] =
             lastName: "Chang",
             authProvider: "apple",
             authKey: "",
-            createdDate: new Date(1618941338), // 4/20/21
+            createdDate: new Date(new Date().setMonth(new Date().getMonth() - 3)),
             emailAddress: "cchang@orlowsoft.com",
-            subscriptionExpirationDate: new Date(1818961338), // 4/22/27,
+            subscriptionExpirationDate: new Date(new Date().setMonth(new Date().getMonth() + 3)),
             isPremium: new Date() < this.subscriptionExpirationDate,
             homeId: "460127fe-0f2f-48b7-a12d-dfe6b238e441",
         },
