@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Modal, useColorScheme } from 'react-native';
+import {StyleSheet, Modal, useColorScheme, Alert} from 'react-native';
 import { Text, View } from '../components/Themed';
 import Colors from '../constants/Colors';
 import { RFValue } from "react-native-responsive-fontsize";
@@ -7,15 +7,79 @@ import EmojiButton from '../components/EmojiButton';
 import RNPickerSelect from 'react-native-picker-select';
 import OSIInput from "../components/OSIInput";
 import OSIButton from "../components/OSIButton";
+import {addChore, addGroceryItem, currentUser} from "../roomy-api/ApiFunctions";
+import {v4 as uuidv4} from 'uuid';
+
 
 export default function AddGroceryScreen(props: { isVisible: boolean, close: Function }) {
 
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
 
   const [emoji, setEmoji] = useState("🧽");
-  const [quantity, setQuantity] = useState('1');
-  const [unitCost, setUnitCost] = useState('3.00');
+  const [quantity, setQuantity] = useState(1);
+  const [unitCost, setUnitCost] = useState(0);
   const [name, setName] = useState('');
+  const [whoFor, setWhoFor] = useState('');
+
+  function addChoreButtonPress()
+  {
+
+    if (name == null || name == "")
+    {
+      Alert.alert("Please give the item a name");
+      return;
+    }
+
+    if (emoji == null || emoji == "")
+    {
+      Alert.alert("Please give the item an Emoji");
+      return;
+    }
+
+    if (whoFor == null || whoFor == "")
+    {
+      Alert.alert("Please select who the item is for");
+      return;
+    }
+
+    if (quantity == null || quantity <= 0)
+    {
+      Alert.alert("Please set a valid quantity");
+      return;
+    }
+
+    if (unitCost == null || unitCost <= 0)
+    {
+      Alert.alert("Please set a valid price");
+      return;
+    }
+
+
+
+    addGroceryItem({
+      buyerId: whoFor,
+      id: uuidv4(),
+      price: 0,
+      quantity: 0,
+      name: name,
+      emoji: emoji
+    });
+
+    closeScreen();
+  }
+
+  function closeScreen()
+  {
+    props.close();
+
+    // Clear out vals for next chore
+    setQuantity(1);
+    setEmoji("🧹");
+    setWhoFor('');
+    setName('');
+    setUnitCost(0.00);
+  }
+
 
   return (
     <Modal animationType={"slide"} presentationStyle="pageSheet" visible={props.isVisible} onRequestClose={() => props.close()} onDismiss={() => props.close()} style={{ backgroundColor: adColors.background }}>
@@ -32,12 +96,10 @@ export default function AddGroceryScreen(props: { isVisible: boolean, close: Fun
         <Text style={styles.inputTitle}>Item For</Text>
         <View style={styles.input}>
           <RNPickerSelect
-            onValueChange={(value) => console.log(value)}
+            onValueChange={(value) => setWhoFor(value)}
             items={[
-              { label: 'Saul Goodman', value: 'football' },
-              { label: 'Walter White', value: 'baseball' },
-              { label: 'Nicholas Orlowsky', value: 'hockey' },
-              { label: 'For the House', value: 'house' },
+              { label: 'Me', value:  currentUser.id}, // Don't let us create items for other users
+              { label: 'For the House', value:  currentUser.homeId},
             ]}
             style={{ inputIOS: { marginTop: RFValue(7) } }} />
         </View>
@@ -56,8 +118,8 @@ export default function AddGroceryScreen(props: { isVisible: boolean, close: Fun
         <Text style={styles.inputTitle}>Unit Cost</Text>
         <OSIInput clickFunc={setUnitCost} value={unitCost} placeholder="Unit Cost"/>
       </View>
-     <OSIButton value={"Add Grocery"} color={adColors.primaryColor} onPress={props.close}/>
-    </Modal>
+      <OSIButton value={"Add Item"} color={adColors.primaryColor} onPress={addChoreButtonPress}/>
+      <OSIButton value={"Cancel"} color={adColors.systemRed} onPress={closeScreen}/></Modal>
   );
 }
 

@@ -3,6 +3,7 @@ export type GroceryItem = {
     buyerId: string,
     price: number,
     quantity: number,
+    emoji: string
     name: string
 };
 

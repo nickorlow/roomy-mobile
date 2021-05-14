@@ -49,31 +49,37 @@ export default function AddChoreScreen(props: { isVisible: boolean, close: Funct
     if (name == null || name == "")
     {
       Alert.alert("Please give the chore a name");
+      return;
     }
 
     if (emoji == null || emoji == "")
     {
       Alert.alert("Please give the chore an Emoji");
+      return;
     }
 
     if (person == null || person == "")
     {
       Alert.alert("Please assign the chore to a user");
+      return;
     }
 
     if (repetition == null || repetition == "")
     {
       Alert.alert("Please choose the repetition");
+      return;
     }
 
     if (date == null)
     {
       Alert.alert("Please choose the date");
+      return;
     }
 
     if (duration == null || duration == "")
     {
       Alert.alert("Please choose a duration");
+      return;
     }
 
     addChore({

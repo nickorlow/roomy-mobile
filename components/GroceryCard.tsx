@@ -37,7 +37,7 @@ export default function GroceryCard() {
 
     return (
         <LongCard color={adColors.cardColor}>
-            <AddGroceryScreen isVisible={isVisible} close={() => setVisible(false)}/>
+            <AddGroceryScreen isVisible={isVisible} close={() => {setVisible(false); useForceUpdate();}}/>
             <View style={{ flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'space-between'}} >
                 <TransparentCard>
                     <Text style={[styles.title, {maxWidth: 250, color:adColors.text }]}>Items to Buy</Text>
