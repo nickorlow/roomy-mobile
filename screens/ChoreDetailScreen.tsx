@@ -6,15 +6,8 @@ import Colors from '../constants/Colors';
 import { RFValue } from "react-native-responsive-fontsize";
 import OSIButton from "../components/OSIButton";
 import { Audio } from 'expo-av';
-import {markChoreDone} from "./Constants";
-
-export type Chore = {
-  emoji: string,
-  name: string,
-  date: Date,
-  person: string,
-  id: string
-};
+import {markChoreDone} from "../roomy-api/ApiFunctions";
+import {Chore} from "../roomy-api/Types";
 
 export default function ChoreDetailScreen(props: { isVisible: boolean, close: Function, chore: Chore }) {
 

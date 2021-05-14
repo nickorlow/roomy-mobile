@@ -7,6 +7,7 @@ import Colors from '../../constants/Colors';
 import { RFValue } from "react-native-responsive-fontsize";
 
 import useColorScheme from '../../hooks/useColorScheme';
+import {resetVars} from "../../roomy-api/ApiFunctions";
 
 export default function WelcomeScreen({
   navigation,
@@ -24,7 +25,7 @@ export default function WelcomeScreen({
           <FeatureCard title="Pay" content="Roomy makes it easy for you and your roomates to pay for utilities and rent." icon="card" iconcolor={adColors.text} />
         </View>
       </View>
-      <TouchableOpacity onPress={() => navigation.replace('Login')} onLongPress={() => navigation.replace('Root')} style={styles.link}>
+      <TouchableOpacity onPress={() => navigation.replace('Login')} onLongPress={() => {resetVars(); navigation.replace('Root');}} style={styles.link}>
         <Card color={adColors.primaryColor} style={{ height: "100%", }}>
           <Text style={[styles.subcontent, { textAlign: 'center', marginTop: 3 }]}>Continue</Text>
         </Card>

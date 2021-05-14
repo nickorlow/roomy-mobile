@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
 import { LongCard, TransparentCard } from "../components/Card";
 import { Text, View } from "../components/Themed";
@@ -7,11 +7,33 @@ import { RFValue } from "react-native-responsive-fontsize";
 import Colors from "../constants/Colors";
 import OSIButton from "../components/OSIButton";
 import AddRuleScreen from "../screens/AddRuleScreen";
+import {useIsFocused} from "@react-navigation/native";
+import ChoreItem from "../components/ChoreListItem";
+import {getRules} from "../roomy-api/ApiFunctions";
+import RuleCard from "../components/RuleCard";
 
-export default function RulesScreen(rules) {
+export default function RulesScreen() {
     const [isVisible, setVisible] = useState(false);
     const oadColors = useColorScheme() != "dark" ? Colors.dark : Colors.light;
     const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
+
+
+  const isFocused = useIsFocused();
+  const [list, setList] = useState([]);
+  const [value, setValue] = useState(0); // integer state
+  function useForceUpdate(){
+    setValue(value+1); // update the state to force render
+  }
+
+  useEffect(() => {
+    var locList = [];
+    for (var rule of getRules()) {
+      locList.push(<RuleCard rule={rule}/>);
+    }
+    setList(locList);
+  }, [value, isFocused]);
+
+
   return (
     <View style={styles.container}>
       <View
@@ -41,103 +63,15 @@ export default function RulesScreen(rules) {
       </View>
       <ScrollView style={[{ width: "100%", height: "100%" }]}>
         <View style={styles.container}>
-          <LongCard color={adColors.cardColor}>
           <AddRuleScreen isVisible={isVisible} close={() => setVisible(false)}/>
-            <View
-              style={{
-                flexDirection: "row",
-                backgroundColor: "transparent",
-                justifyContent: "space-between",
-              }}
-            ></View>
-            <View
-              style={{
-                flexDirection: "row",
-                backgroundColor: "transparent",
-                flexShrink: 1,
-              }}
-              lightColor="#eee"
-              darkColor="#1D1D1D"
-            >
-              <Text style={{ fontSize: RFValue(35) }}>{"1️⃣"}</Text>
-              <TransparentCard style={{ paddingLeft: 5, flex: 1 }}>
-                <Text style={[styles.listItemTitle, { color: adColors.text }]}>
-                  No Loud Music
-                </Text>
-                <Text style={[{ color: "grey", fontWeight: "bold" }]}>
-                  Do not play music higher than 3 decibels(idk if that is
-                  actually the right measurement lol, just demonstrating long
-                  description)
-                </Text>
-              </TransparentCard>
-            </View>
-          </LongCard>
-          <LongCard color={adColors.cardColor}>
-            <View
-              style={{
-                flexDirection: "row",
-                backgroundColor: "transparent",
-                justifyContent: "space-between",
-              }}
-            ></View>
-            <View
-              style={{
-                flexDirection: "row",
-                backgroundColor: "transparent",
-                flexShrink: 1,
-              }}
-              lightColor="#eee"
-              darkColor="#1D1D1D"
-            >
-              <Text style={{ fontSize: RFValue(35) }}>{"2️⃣"}</Text>
-              <TransparentCard style={{ paddingLeft: 5, flex: 1 }}>
-                <Text style={[styles.listItemTitle, { color: adColors.text }]}>
-                  No Loud Music
-                </Text>
-                <Text style={[{ color: "grey", fontWeight: "bold" }]}>
-                  Do not play music higher than 3 decibels(idk if that is
-                  actually the right measurement lol, just demonstrating long
-                  description)
-                </Text>
-              </TransparentCard>
-            </View>
-          </LongCard>
-          <LongCard color={adColors.cardColor}>
-            <View
-              style={{
-                flexDirection: "row",
-                backgroundColor: "transparent",
-                justifyContent: "space-between",
-              }}
-            ></View>
-            <View
-              style={{
-                flexDirection: "row",
-                backgroundColor: "transparent",
-                flexShrink: 1,
-              }}
-              lightColor="#eee"
-              darkColor="#1D1D1D"
-            >
-              <Text style={{ fontSize: RFValue(35) }}>{"3️⃣"}</Text>
-              <TransparentCard style={{ paddingLeft: 5, flex: 1 }}>
-                <Text style={[styles.listItemTitle, { color: adColors.text }]}>
-                  No Loud Music
-                </Text>
-                <Text style={[{ color: "grey", fontWeight: "bold" }]}>
-                  Do not play music higher than 3 decibels(idk if that is
-                  actually the right measurement lol, just demonstrating long
-                  description)
-                </Text>
-              </TransparentCard>
-            </View>
-          </LongCard>
+          {list}
         </View>
         <OSIButton value={"Add Rule"} color={adColors.primaryColor} onPress={() => {setVisible(true)}}/>
       </ScrollView>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   item: {

@@ -1,18 +1,21 @@
 import React, {useState} from 'react';
 import { StyleSheet, TouchableOpacity} from 'react-native';
-import { TransparentCard } from '../components/Card';
-import { Text, View } from '../components/Themed';
+import { TransparentCard } from './Card';
+import { Text, View } from './Themed';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import { RFValue } from 'react-native-responsive-fontsize';
+import {GroceryItem, User} from "../roomy-api/Types"
+import {getUser} from "../roomy-api/ApiFunctions";
 
 
 
-export default function GroceryItem ({ item }) {
+export default function GroceryListItem (props: {item: GroceryItem, key: number  }) {
 
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
     const [isVisible, setVisible] = useState(false);
-    const totalPrice = item.quantity * item.unitCost;
+    const totalPrice = props.item.quantity * props.item.price;
+    const user: User = getUser(props.item.buyerId)[0];
     return (
 
     <View style={[styles.item, {backgroundColor: 'transparent', paddingLeft: 0}]}>
@@ -22,9 +25,9 @@ export default function GroceryItem ({ item }) {
 
       <Text style={{fontSize: RFValue(35)}}>{'🛒'}</Text>
         <TransparentCard style={{paddingLeft: 5}}>
-          <Text style={[styles.listItemTitle, {color: adColors.text}]}>{item.itemName}</Text>
-          <Text style={[{color: "grey", fontWeight: 'bold'}]}>Quantity: {item.quantity} | Total Cost: ${totalPrice}</Text>
-          <Text style={[{color: "grey", fontWeight: 'bold'}]}>For {item.boughtFor}</Text>
+          <Text style={[styles.listItemTitle, {color: adColors.text}]}>{ props.item.name}</Text>
+          <Text style={[{color: "grey", fontWeight: 'bold'}]}>Quantity: {props.item.quantity} | Total Cost: ${totalPrice}</Text>
+          <Text style={[{color: "grey", fontWeight: 'bold'}]}>For {user.firstName+" "+user.lastName}</Text>
         </TransparentCard>
       </View>
       </TouchableOpacity>

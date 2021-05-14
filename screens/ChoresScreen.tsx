@@ -6,7 +6,7 @@ import Colors from '../constants/Colors';
 import { ScrollView } from 'react-native-gesture-handler';
 import useColorScheme from '../hooks/useColorScheme';
 import { RFValue } from 'react-native-responsive-fontsize';
-import { getMyChores, getNotMyChores} from './Constants';
+import { getMyChores, getHomeChores} from '../roomy-api/ApiFunctions';
 import ChoreCard from "../components/ChoreCard";
 
 export default function ChoresScreen() {
@@ -31,7 +31,7 @@ export default function ChoresScreen() {
         <ScrollView style={[{ width: "100%", height: "100%" }]}>
           <View style={styles.container}>
             <ChoreCard listFunction={getMyChores} title={"My Chores"}/>
-            <ChoreCard listFunction={getNotMyChores} title={"House Chores"}/>
+            <ChoreCard listFunction={getHomeChores} title={"House Chores"}/>
           </View>
         </ScrollView>
     </View>

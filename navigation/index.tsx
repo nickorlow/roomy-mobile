@@ -38,7 +38,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false}} initialRouteName="Welcome">
+    <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="Welcome">
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name='Welcome' component={WelcomeScreen} />
       <Stack.Screen name='Location' component={LocationScreen} />
@@ -49,7 +49,7 @@ function RootNavigator() {
       <Stack.Screen name="JoinHouseManual" component={JoinHouseManualScreen} />
       <Stack.Screen name="CreateHouse" component={CreateHouseScreen} />
       <Stack.Screen name="Root" component={BottomTabNavigator} />
-      
+
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );

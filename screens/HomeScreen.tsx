@@ -6,7 +6,7 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Ionicons } from '@expo/vector-icons';
-import { getMyChores } from './Constants';
+import { getMyChores, getNotMyChores} from '../roomy-api/ApiFunctions';
 import ChoreCard from "../components/ChoreCard";
 import GroceryCard from "../components/GroceryCard";
 
