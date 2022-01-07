@@ -8,11 +8,15 @@ import Colors from '../../constants/Colors';
 import useColorScheme from '../../hooks/useColorScheme';
 import { Ionicons } from '@expo/vector-icons';
 import { RFValue } from "react-native-responsive-fontsize";
+import {User} from "../../roomy-api/Types";
+import {useSelector} from "react-redux";
+import {UserState} from "../../reducers/userReducer";
 
 export default function SubscriptionScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, 'Subscription'>) {
 
+  const user: User | null = useSelector<any, UserState["user"]>((state) => state.user.user);
   const [buyPremium, setBuyPremium] = useState(true);
 
   const toggleBuyPremium = (setWhat : boolean) => {
@@ -26,7 +30,11 @@ export default function SubscriptionScreen({
     }
     else
     {
-      navigation.replace('JoinCreateHouse');
+        if(user?.homeId != "") {
+          navigation.replace('Root');
+        } else {
+          navigation.replace('JoinCreateHouse');
+        }
     }
   };
 

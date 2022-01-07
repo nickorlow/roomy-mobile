@@ -27,7 +27,7 @@ export default function GroceryListItem (props: {item: GroceryItem, key: number 
         <TransparentCard style={{paddingLeft: 5}}>
           <Text style={[styles.listItemTitle, {color: adColors.text}]}>{ props.item.name}</Text>
           <Text style={[{color: "grey", fontWeight: 'bold'}]}>Quantity: {props.item.quantity} | Total Cost: ${totalPrice}</Text>
-          <Text style={[{color: "grey", fontWeight: 'bold'}]}>For {user.firstName+" "+user.lastName}</Text>
+          <Text style={[{color: "grey", fontWeight: 'bold'}]}>For FIRST LAST NAME</Text>
         </TransparentCard>
       </View>
       </TouchableOpacity>

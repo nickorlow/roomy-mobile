@@ -7,14 +7,17 @@ import EmojiButton from '../components/EmojiButton';
 import RNPickerSelect from 'react-native-picker-select';
 import OSIInput from "../components/OSIInput";
 import OSIButton from "../components/OSIButton";
-import {addChore, addGroceryItem, currentUser} from "../roomy-api/ApiFunctions";
+import {addChore, addGroceryItem} from "../roomy-api/ApiFunctions";
 import {v4 as uuidv4} from 'uuid';
+import {User} from "../roomy-api/Types";
+import {useSelector} from "react-redux";
+import {UserState} from "../reducers/userReducer";
 
 
 export default function AddGroceryScreen(props: { isVisible: boolean, close: Function }) {
 
+  const user: User | null = useSelector<any, UserState["user"]>((state) => state.user.user);
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
-
   const [emoji, setEmoji] = useState("🧽");
   const [quantity, setQuantity] = useState(1);
   const [unitCost, setUnitCost] = useState(0);
@@ -98,8 +101,8 @@ export default function AddGroceryScreen(props: { isVisible: boolean, close: Fun
           <RNPickerSelect
             onValueChange={(value) => setWhoFor(value)}
             items={[
-              { label: 'Me', value:  currentUser.id}, // Don't let us create items for other users
-              { label: 'For the House', value:  currentUser.homeId},
+              { label: 'Me', value:  user?.id}, // Don't let us create items for other users
+              { label: 'For the House', value:  user?.homeId},
             ]}
             style={{ inputIOS: { marginTop: RFValue(7) } }} />
         </View>

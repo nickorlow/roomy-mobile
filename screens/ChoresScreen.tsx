@@ -8,11 +8,15 @@ import useColorScheme from '../hooks/useColorScheme';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { getMyChores, getHomeChores} from '../roomy-api/ApiFunctions';
 import ChoreCard from "../components/ChoreCard";
+import {UserState} from "../reducers/userReducer";
+import {useSelector} from "react-redux";
+import {User} from "../roomy-api/Types";
 
 export default function ChoresScreen() {
 
   const oadColors = useColorScheme() != "dark" ? Colors.dark : Colors.light;
   const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
+  const user: User | null = useSelector<any, UserState["user"]>((state) => state.user.user);
 
 
   return (
@@ -30,8 +34,8 @@ export default function ChoresScreen() {
      </View>
         <ScrollView style={[{ width: "100%", height: "100%" }]}>
           <View style={styles.container}>
-            <ChoreCard listFunction={getMyChores} title={"My Chores"}/>
-            <ChoreCard listFunction={getHomeChores} title={"House Chores"}/>
+            <ChoreCard title={"My Chores"}  user={user?.id} filterType={false}/>
+            <ChoreCard title={"House Chores"} user={user?.id} filterType={true}/>
           </View>
         </ScrollView>
     </View>

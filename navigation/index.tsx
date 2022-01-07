@@ -17,6 +17,7 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
+import AllChoresScreen from "../screens/AllChoresScreen";
 //import JoinCreateHouseScreen from '../screens/onboarding/JoinCreateHouseScreen';
 //import JoinHouseScreen from '../screens/onboarding/JoinHouseScreen';
 
@@ -49,7 +50,7 @@ function RootNavigator() {
       <Stack.Screen name="JoinHouseManual" component={JoinHouseManualScreen} />
       <Stack.Screen name="CreateHouse" component={CreateHouseScreen} />
       <Stack.Screen name="Root" component={BottomTabNavigator} />
-
+        <Stack.Screen name="AllChores" component={AllChoresScreen} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );

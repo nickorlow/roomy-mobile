@@ -33,7 +33,7 @@ export default function ChoreItem (props: { chore: Chore, closeFunc: Function, k
         <TransparentCard style={{paddingLeft: 5}}>
           <Text style={[styles.listItemTitle, {color: isLate ? "red" : isDoneSoon ? "#F59810" : adColors.text}]}>{props.chore.name}</Text>
           <Text style={[{color: isLate ? adColors.systemRed : isDoneSoon ? "#F59810" : "grey", fontWeight: 'bold'}]}>{props.chore.date.toLocaleString()}</Text>
-          <Text style={[{color: isLate ? adColors.systemRed : isDoneSoon ? "#F59810" : "grey", fontWeight: 'bold'}]}>{user.firstName+" "+user.lastName}</Text>
+          <Text style={[{color: isLate ? adColors.systemRed : isDoneSoon ? "#F59810" : "grey", fontWeight: 'bold'}]}>FIRST LAST NAME</Text>
         </TransparentCard>
       </View>
       </TouchableOpacity>

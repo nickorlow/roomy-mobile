@@ -5,32 +5,38 @@ import {
     initPlaceholderUser,
     initPlaceholderUsers
 } from "./PlaceholderData";
+import {Alert} from "react-native";
+import {useDispatch} from "react-redux";
 
-var chores: Chore[] = [];
+var userId = '0e1aae52-63db-4501-bf19-e30c24810750';
+var userKey = '0e1aae52-63db-4501-bf19-e30c24810750:r1a7548a3876c4de9a3c3b0a991e5bd32.0.srwq.GoO_JAIS7LNwNnpI8eRDvw';
 
-var groceryItems: GroceryItem[] = [];
+export var chores: Chore[] = [];
+
+export var groceryItems: GroceryItem[] = [];
 
 var rules: Rule[] = [];
 
 var roomies: User[] = [];
 
-export var currentUser: User;
+export var currentUser: User ;
 
+export function getCurrentUser() {
+    fetch('https://api.useroomy.com/user/'+userId, {
+        method: 'GET',
+        headers: {
+            Authorization: userKey,
+            'Authorization-Provider': 'apple'
+        }
+    }).then((response) => response.json()).then((json) => {
+        currentUser = json;
+        console.log(json)
+    });
+}
 
 // SECTION: Chores ----------------------------------
 export function getChores() {
-    // TODO: Make API Call
-    chores.sort((a: Chore, b: Chore) => {
-        return a.date.valueOf() - b.date.valueOf();
-    });
     return chores;
-}
-
-export function markChoreDone(id: string) {
-    // TODO: Make API Call
-    chores = chores.filter(function (obj) {
-        return obj.id !== id;
-    });
 }
 
 export function getMyChores() {
@@ -61,12 +67,8 @@ export function addChore(chore: Chore) {
 }
 
 // SECTION: Groceries ----------------------------------
-export function getItemsToBuy() {
-    var list = [];
-    for (var item of getAllItems()) {
-            list.push(item);
-    }
-    return list;
+export async function getItemsToBuy() {
+    return groceryItems;
 }
 
 export function getAllItems() {

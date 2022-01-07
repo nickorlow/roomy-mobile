@@ -2,8 +2,8 @@ import {Chore, GroceryItem, Rule, User} from "./Types";
 
 export var initPlaceholderUser: User = {
     id: "6e2d99f6-31ad-4a12-88d2-0f45479eea6f",
-    firstName: "Nicholas",
-    lastName: "Orlowsky",
+    firstName: "Loading",
+    lastName: "Loading",
     authProvider: "apple",
     authKey: "",
     createdDate: new Date(new Date().setMonth(new Date().getMonth() - 3)),

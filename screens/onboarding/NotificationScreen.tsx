@@ -8,11 +8,16 @@ import Colors from '../../constants/Colors';
 import useColorScheme from '../../hooks/useColorScheme';
 import { Ionicons } from '@expo/vector-icons';
 import { RFValue } from "react-native-responsive-fontsize";
+import {User} from "../../roomy-api/Types";
+import {useSelector} from "react-redux";
+import {UserState} from "../../reducers/userReducer";
 
 export default function NotificationScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, 'Notification'>) {
 
+
+  const user: User | null = useSelector<any, UserState["user"]>((state) => state.user.user);
   const [sendNotifs, setSentNotifs] = useState(true);
 
   const setNotifs = (setWhat : boolean) => {
@@ -26,7 +31,15 @@ export default function NotificationScreen({
     }
     else
     {
-      navigation.replace('Subscription')
+      if(user?.isPremium) {
+        if(user?.homeId != "") {
+          navigation.replace('Root');
+        } else {
+          navigation.replace('JoinCreateHouse');
+        }
+      } else {
+        navigation.replace('Subscription')
+      }
     }
   };
 

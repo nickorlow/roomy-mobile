@@ -9,6 +9,8 @@ import { AsyncStorage } from "react-native";
 import * as AppleAuthentication from 'expo-apple-authentication';
 import useColorScheme from '../../hooks/useColorScheme';
 import { RFValue } from "react-native-responsive-fontsize";
+import {useDispatch} from "react-redux";
+import {loginUser} from "../../reducers/userReducer";
 
 export default function LoginScreen({
   navigation,
@@ -16,6 +18,7 @@ export default function LoginScreen({
 
 
   const [isIos, setIsIOS] = useState(false);
+  const dispatch = useDispatch()
 
   const toggleBuyPremium = async () => {
     setIsIOS(await AppleAuthentication.isAvailableAsync());
@@ -57,7 +60,11 @@ export default function LoginScreen({
             });
             await AsyncStorage.setItem('credential.apple', JSON.stringify(credential));
 
+            var userId = '0e1aae52-63db-4501-bf19-e30c24810750';
+            var userKey = '0e1aae52-63db-4501-bf19-e30c24810750:r1a7548a3876c4de9a3c3b0a991e5bd32.0.srwq.GoO_JAIS7LNwNnpI8eRDvw';
 
+            dispatch({type: "LOGIN_USER", payload: {userId:userId , auth: userKey}});
+            dispatch(loginUser())
             navigation.replace('Location');
           } catch (e) {
             Alert.alert("Error", "Sign in with Apple failed.");

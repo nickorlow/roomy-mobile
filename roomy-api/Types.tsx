@@ -1,5 +1,6 @@
 export type GroceryItem = {
     id: string,
+    homeId: string,
     buyerId: string,
     price: number,
     quantity: number,
@@ -39,4 +40,18 @@ export type User = {
 export type UserCreationResponse = {
   createdUser: User,
   refreshToken: string
+};
+
+export type Home ={
+  id: string,
+  createdDate: string,
+  name: string,
+  location: {
+      streetAddress: string,
+      state: string,
+      country: string,
+      city: string,
+      zip: string,
+      googleLocationId: string
+  }
 };

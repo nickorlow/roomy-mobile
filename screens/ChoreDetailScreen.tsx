@@ -6,8 +6,11 @@ import Colors from '../constants/Colors';
 import { RFValue } from "react-native-responsive-fontsize";
 import OSIButton from "../components/OSIButton";
 import { Audio } from 'expo-av';
-import {markChoreDone} from "../roomy-api/ApiFunctions";
-import {Chore} from "../roomy-api/Types";
+import {getChores, markChoreDone} from "../roomy-api/ApiFunctions";
+import {Chore, Home} from "../roomy-api/Types";
+import {useDispatch, useSelector} from "react-redux";
+import {HomeState} from "../reducers/homeReducer";
+import {UserState} from "../reducers/userReducer";
 
 export default function ChoreDetailScreen(props: { isVisible: boolean, close: Function, chore: Chore }) {
 
@@ -19,6 +22,9 @@ export default function ChoreDetailScreen(props: { isVisible: boolean, close: Fu
   const [repetetion, setRepetetion] = useState('Daily');
   const [name, setName] = useState('');
   const [doneSound, setDoneSound]: any = useState();
+  const dispatch = useDispatch();
+  const home: Home | null = useSelector<any, HomeState["home"]>((state) => state.home.home);
+  const ustate: UserState | null = useSelector<any, UserState["user"]>((state) => state.user);
 
   function addDay(day: string)
   {
@@ -35,9 +41,25 @@ export default function ChoreDetailScreen(props: { isVisible: boolean, close: Fu
 
   async function markChoreDonePress()
   {
-    await playSound();
-    markChoreDone(props.chore.id);
-    props.close();
+    var bod: string = JSON.stringify({
+      completedDate: (new Date()),
+      id: props.chore.id
+    });
+    console.log(bod)
+    fetch('https://api.useroomy.com/home/'+home?.id+'/chores/'+props.chore.id, {
+      method: 'PATCH',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: ustate?.auth || '',
+        'Authorization-Provider': 'apple'
+      },
+      body: bod
+    }).then((response) =>  {
+      playSound();
+      props.close();
+    }).catch(function (response) {
+      Alert.alert("Error!", "We couldn't connect to our servers!");
+    });
   }
   async function playSound() {
     const { sound } = await Audio.Sound.createAsync(

@@ -1,24 +1,29 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import * as React from 'react';
 import { useState } from 'react';
-import {StyleSheet, Text, TouchableOpacity, View, TextInput, TouchableHighlight, Alert, ScrollView} from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import {StyleSheet, Text, TouchableOpacity, View, Alert, ScrollView} from 'react-native';
 import { RootStackParamList } from '../../types';
-import Card, {MicroFeatureCard, TitledCard, FeatureCard, LongCard} from '../../components/Card';
+import Card from '../../components/Card';
 import Colors from '../../constants/Colors';
 import useColorScheme from '../../hooks/useColorScheme';
-import { Ionicons } from '@expo/vector-icons';
-
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { RFValue } from "react-native-responsive-fontsize";
 import OSIButton from "../../components/OSIButton";
-import {currentUser, resetVars} from "../../roomy-api/ApiFunctions";
+import { resetVars} from "../../roomy-api/ApiFunctions";
 import PremiumCard from "../../components/PremiumCard";
+import {Home, User} from "../../roomy-api/Types";
+import {useSelector} from "react-redux";
+import {UserState} from "../../reducers/userReducer";
+import {HomeState} from "../../reducers/homeReducer";
+
+
 export default function SettingsScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, 'Settings'>) {
 
-  const [buyPremium, setBuyPremium] = useState(true);
 
+  const home: Home | null = useSelector<any, HomeState["home"]>((state) => state.home.home);
+  const user: User | null = useSelector<any, UserState["user"]>((state) => state.user.user);
+  const [buyPremium, setBuyPremium] = useState(true);
   const [isDeveloper, setIsDeveloper] = useState(false);
   const toggleBuyPremium = (setWhat : boolean) => {
     setBuyPremium(setWhat);
@@ -34,6 +39,12 @@ export default function SettingsScreen({
       navigation.replace('Home')
     }
   };
+
+
+  function showCode()
+  {
+    Alert.alert("Roomy Code", home?.id, [{text: "Ok"}]);
+  }
 
   function requestApp()
   {
@@ -57,34 +68,36 @@ export default function SettingsScreen({
       <ScrollView>
         <View style={styles.container}>
       <Card color={adColors.cardColor} style={{ width: "90%",paddingBottom: RFValue(15)}}>
-      <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>{currentUser.firstName + " " + currentUser.lastName}</Text>
-        <Text style={{color: adColors.text}}>Member since {currentUser.createdDate.toDateString()}</Text>
+      <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>{user?.firstName + " " + user?.lastName}</Text>
+        <Text style={{color: adColors.text}}>Member since {user?.createdDate.toString()}</Text>
         <OSIButton onPress={requestApp} value={"Log Out"} color={adColors.systemRed} style={{marginTop: 0}}/>
       </Card>
 
 
       <Card color={adColors.cardColor} style={[{ width: "90%", maxHeight: RFValue(315), paddingBottom: RFValue(25)}]}><View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'transparent' }}>
-          <View>
-            <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>{currentUser.subscriptionExpirationDate > new Date() ? "Premium" : "Basic"}</Text>
-            <Text style={{color: adColors.text}}>{currentUser.subscriptionExpirationDate > new Date() ? "Ends/Renews on " : "Expired on"}{currentUser.subscriptionExpirationDate.toDateString()}</Text>
-            {currentUser.subscriptionExpirationDate > new Date() && <Text style={{color: adColors.text}}>You may cancel your subscription via the App Store</Text>}
-            {currentUser.subscriptionExpirationDate > new Date() || <PremiumCard/>}
+          <View style={{width: "90%"}}>
+            <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>{user?.subscriptionExpirationDate > new Date() ? "Premium" : "Basic"}</Text>
+            <Text style={{color: adColors.text}}>{user?.subscriptionExpirationDate > new Date() ? "Ends/Renews on " : "Premium expired on "}{user?.subscriptionExpirationDate.toString()}</Text>
+            {user?.subscriptionExpirationDate > new Date() && <Text style={{color: adColors.text}}>You may cancel your subscription via the App Store</Text>}
+
           </View>
         </View></View>
       </Card>
+
+          {user?.subscriptionExpirationDate > new Date() || <PremiumCard/>}
 
       <Card color={adColors.cardColor} style={[{ width: "90%", paddingBottom: RFValue(25) }]}>
       <TouchableOpacity onPress={() => { toggleBuyPremium(true) }}><View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'transparent' }}>
           <View>
-            <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>House</Text>
-            <Text style={{color: adColors.text}}>Member of Casa de Federighi</Text>
+            <Text style={[styles.subtitle, { marginBottom: 2, maxWidth: 250, color: adColors.text }]}>Home</Text>
+            <Text style={{color: adColors.text}}>Member of {home?.name}</Text>
           </View>
 
         </View></View>
-        <OSIButton onPress={requestVar} value={"Change House Name"} color={adColors.primaryColor}/>
-        <OSIButton onPress={requestVar} value={"Show Roomy Code"} color={adColors.primaryColor}/>
+        {/*<OSIButton onPress={requestVar} value={"Change House Name"} color={adColors.primaryColor}/>*/}
+        <OSIButton onPress={showCode} value={"Show Roomy Code"} color={adColors.primaryColor}/>
         <OSIButton onPress={requestVar} value={"Leave House"} color={adColors.systemRed}/>
         </TouchableOpacity>
       </Card>

@@ -9,43 +9,68 @@ import useColorScheme from "../hooks/useColorScheme";
 import Colors from "../constants/Colors";
 import {useIsFocused} from "@react-navigation/native";
 import AddChoreScreen from "../screens/AddChoreScreen";
+import {chores} from "../roomy-api/ApiFunctions";
+import {Chore, User} from "../roomy-api/Types";
+import {useDispatch, useSelector} from "react-redux";
+import {UserState} from "../reducers/userReducer";
+import {ChoreState, getChores} from "../reducers/choreReducer";
+import ChoreDetailScreen from "../screens/ChoreDetailScreen";
+import AllChoresScreen from "../screens/AllChoresScreen";
 
-export default function ChoreCard(props: {listFunction: Function, title: string}) {
+export default function ChoreCard(props: {title: string, user: string | null | undefined, filterType: boolean}) {
 
+    const chores: Chore[] | null = useSelector<any, ChoreState["chores"]>((state) => state.chores.chores);
+    const dispatch = useDispatch()
     const isFocused = useIsFocused();
     const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
-    const [list, setList] = useState([]);
     const [isVisible, setVisible] = useState(false);
+    const [iscVisible, setcVisible] = useState(false);
     const [value, setValue] = useState(0); // integer state
+    var count = 0;
+
     function useForceUpdate(){
         setValue(value+1); // update the state to force render
     }
 
     useEffect(() => {
-        var locList = [];
-        for (var item of props.listFunction().slice(0,3)) {
-            locList.push(<ChoreItem chore={item} closeFunc={useForceUpdate}/>);
-        }
-        setList(locList);
+        count = 0;
+        dispatch(getChores());
     }, [value, isFocused]);
 
     return (
-        <LongCard color={adColors.cardColor}>
+        <LongCard style={{minHeight: 500}} color={adColors.cardColor}>
+            <AllChoresScreen isVisible={iscVisible} close={() => {setcVisible(false);}}/>
+
             <AddChoreScreen isVisible={isVisible} close={() => {setVisible(false); useForceUpdate();}}/>
             <View style={{ flexDirection: 'row', backgroundColor: 'transparent', justifyContent: 'space-between'}} >
                 <TransparentCard>
                     <Text style={[styles.title, {maxWidth: 250, color:adColors.text }]}>{props.title}</Text>
                 </TransparentCard>
 
-                <TouchableOpacity onPress={() => {setVisible(true)}}>
+                <TouchableOpacity onPress={() => {useForceUpdate(); setVisible(true);}}>
                     <Ionicons name="add-circle" color="#F59810" size={36}/>
                 </TouchableOpacity>
             </View>
 
-            {list}
-
-            { ( props.listFunction().length-3 > 0) &&
-            <Text style={{textAlign: 'center', color: "#F59810", fontWeight: 'bold', fontSize: 25, }}>{ props.listFunction().length-3} More Today</Text>}
+            {Array.isArray(chores) && chores.map((chore, i)=>{
+                if(i<3 && (props.filterType ?  props.user == chore.userId : props.user != chore.userId))
+                {
+                    count++;
+                    return <ChoreItem closeFunc={useForceUpdate} chore={chore} key={i} />
+                } else if (props.filterType ?  props.user == chore.userId : props.user != chore.userId) {
+                    i++;
+                    count++;
+                } else
+                {
+                    i++;
+                }
+            })}
+            {count - 3 > 0 &&
+                <TouchableOpacity onPress={() => {setcVisible(true); console.log("hi");}}>
+                    <Text style={{textAlign: 'center', color: "#F59810", fontWeight: 'bold', fontSize: 25, }}>{count-3} More</Text>
+                </TouchableOpacity>
+            }
+            {count == 0 && <Text style={{textAlign: 'center', fontSize: 25, }}>Nothing Here!</Text>}
         </LongCard>
     )
 

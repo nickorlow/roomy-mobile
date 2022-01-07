@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {StyleSheet, Modal, useColorScheme, Alert} from 'react-native';
+import {StyleSheet, Modal, useColorScheme, Alert, ScrollView} from 'react-native';
 import { Text, View } from '../components/Themed';
 import Colors from '../constants/Colors';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
@@ -11,6 +11,10 @@ import OSIInput from "../components/OSIInput";
 import OSIButton from "../components/OSIButton";
 import {addChore, getItemsToBuy, getRoomies} from "../roomy-api/ApiFunctions";
 import {v4 as uuidv4} from 'uuid';
+import {Home, User} from "../roomy-api/Types";
+import {useSelector} from "react-redux";
+import {UserState} from "../reducers/userReducer";
+import {HomeState} from "../reducers/homeReducer";
 
 
 
@@ -27,6 +31,8 @@ export default function AddChoreScreen(props: { isVisible: boolean, close: Funct
   const [name, setName] = useState('');
   const [person, setPerson] = useState('');
 
+  const home: Home | null = useSelector<any, HomeState["home"]>((state) => state.home.home);
+  const user: User | null = useSelector<any, UserState["user"]>((state) => state.user.user);
 
   function addDay(day: string) {
     var localDays: string[] = days;
@@ -111,7 +117,7 @@ export default function AddChoreScreen(props: { isVisible: boolean, close: Funct
 
   return (
     <Modal animationType={"slide"} presentationStyle="pageSheet" visible={props.isVisible} onRequestClose={() => props.close()} onDismiss={() => props.close()} style={{ backgroundColor: adColors.background }}>
-
+      <ScrollView>
       <View style={[{ minHeight: 100, backgroundColor: "#F59810", width: "100%", paddingTop: RFValue(25), paddingHorizontal: RFValue(10), paddingBottom: RFValue(10), flexDirection: 'row', justifyContent: 'space-between' }]}>
         <Text style={[styles.title, { paddingBottom: RFValue(8), marginTop: RFValue(25), color: 'white' }]}>Add Chore</Text>
         <Text style={{ fontSize: RFValue(75) }}>{emoji}</Text>
@@ -119,13 +125,14 @@ export default function AddChoreScreen(props: { isVisible: boolean, close: Funct
 
 
       <View style={{ padding: 10 }}>
+
         <Text style={styles.inputTitle}>Name</Text>
         <OSIInput clickFunc={setName} value={name} placeholder="Chore Name"/>
         <Text style={styles.inputTitle}>Roommate</Text>
         <View style={styles.input}>
           <RNPickerSelect
             onValueChange={(value) => setPerson(value)}
-            items={getRoomiesList()}
+            items={[user?.id]}
             style={{ inputIOS: { marginTop: RFValue(7) } }} />
         </View>
 
@@ -179,6 +186,7 @@ export default function AddChoreScreen(props: { isVisible: boolean, close: Funct
       </View>
       <OSIButton value={"Add Chore"} color={adColors.primaryColor} onPress={addChoreButtonPress}/>
       <OSIButton value={"Cancel"} color={adColors.systemRed} onPress={closeScreen}/>
+    </ScrollView>
     </Modal>
   );
 }

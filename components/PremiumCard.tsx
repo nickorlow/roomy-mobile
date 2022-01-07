@@ -14,14 +14,14 @@ export default function PremiumCard() {
     const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
 
     return (
-        <Card color={adColors.background} style={[{
-            width: "110%",
-            borderColor: adColors.background,
+        <Card color={adColors.cardColor} style={[{
+            width: "90%",
+            borderColor: adColors.cardColor,
             borderWidth: 1.5
         }]}>
-            <View>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between', backgroundColor: adColors.background}}>
-                    <View style={{backgroundColor: adColors.background}}>
+            <View style={{backgroundColor: adColors.cardColor}}>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between', backgroundColor: adColors.cardColor}}>
+                    <View style={{backgroundColor: adColors.cardColor}}>
                         <Text style={[styles.subtitle, {
                             marginBottom: 2,
                             maxWidth: 250,
@@ -33,7 +33,8 @@ export default function PremiumCard() {
                 <View style={[styles.separator, {backgroundColor: adColors.text}]}/>
                 <MicroFeatureCard content="Grocery bill splitting" iconcolor={adColors.text} icon="cart"/>
                 <MicroFeatureCard content="Unlimited chores" iconcolor={adColors.text} icon="infinite"/>
-                <MicroFeatureCard content="Cancel anytime" iconcolor={adColors.text} icon="calendar"/></View>
+                <MicroFeatureCard content="Cancel anytime" iconcolor={adColors.text} icon="calendar"/>
+            </View>
             <OSIButton style={{width: "100%"}} color={adColors.pastelGreen} value={"Upgrade Today!"} onPress={()=>{}}/>
         </Card>
     );

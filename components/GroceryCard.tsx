@@ -2,37 +2,36 @@ import {LongCard, TransparentCard} from "./Card";
 import {Text, View} from "./Themed";
 import {Alert, StyleSheet, TouchableOpacity} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
-import {getItemsToBuy, getMyChores} from "../roomy-api/ApiFunctions";
+import {getItemsToBuy, groceryItems} from "../roomy-api/ApiFunctions";
 import * as React from "react";
 import {useEffect, useState} from "react";
 import ChoreItem from "./ChoreListItem";
 import useColorScheme from "../hooks/useColorScheme";
 import Colors from "../constants/Colors";
 import {useIsFocused} from "@react-navigation/native";
-import GroceryItem from "./GroceryListItem";
+import GroceryListItem from "./GroceryListItem";
 import AddGroceryScreen from "../screens/AddGroceryScreen";
+import {GroceryItem} from "../roomy-api/Types";
+import {useDispatch, useSelector} from "react-redux";
+import {ChoreState} from "../reducers/choreReducer";
+import {getGroceries, GroceryState} from "../reducers/groceryReducer";
 
 export default function GroceryCard() {
 
-
     const [isVisible, setVisible] = useState(false);
-
     const adColors = useColorScheme() == "dark" ? Colors.dark : Colors.light;
     const isFocused = useIsFocused();
-
     const [value, setValue] = useState(0);
     const [list, setList] = useState([]);
+    const groceries: GroceryItem[] | null = useSelector<any, GroceryState["groceries"]>((state) => state.groceries.groceries);
+    const dispatch = useDispatch();
+
     function useForceUpdate(){
         setValue(value+1); // update the state to force render
     }
 
     useEffect(() => {
-        var locList = [];
-        for (var item of getItemsToBuy()) {
-            locList.push(<GroceryItem item={item} />);
-        }
-
-        setList(locList);
+        dispatch(getGroceries());
     }, [value, isFocused]);
 
     return (
@@ -47,7 +46,8 @@ export default function GroceryCard() {
                     <Ionicons name="add-circle" color="#F59810" size={36}/>
                 </TouchableOpacity>
             </View>
-            {list}
+
+            {Array.isArray(groceries) && groceries?.map((groc, i) => {<GroceryListItem item={groc} key={i} />})}
 
             <Text style={{textAlign: 'center', color: "#F59810", fontWeight: 'bold', fontSize: 25}}>See All</Text>
         </LongCard>
