@@ -27,6 +27,7 @@ export const choreReducer = (state:ChoreState = initialState, action: Action) =>
 export const getChores = () => async(dispatch: any, getState: any) => {
     var state = getState().home;
     var ustate = getState().user;
+    console.log(ustate.auth)
     fetch('https://api.useroomy.com/home/'+state.homeId+"/chores", {
         method: 'GET',
         headers: {

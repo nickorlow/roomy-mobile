@@ -21,7 +21,7 @@ export const userReducer = (state:UserState = initialState, action: Action) => {
             return {...state, auth: action.payload.auth, userId: action.payload.userId}
 
         case "SET_USER":
-            return {...state, user: action.payload.user}
+            return {...state, user: action.payload.user, auth: action.payload.auth}
 
         case "LOGOUT_USER":
             console.log('closed')
@@ -43,7 +43,7 @@ export const loginUser = () => async(dispatch: any, getState: any) => {
             'Authorization-Provider': 'apple'
         }
     }).then((response) => response.json()).then((json) => {
-        dispatch({type: "SET_USER", payload: {user: json}});
+        dispatch({type: "SET_USER", payload: {user: json, auth: state.auth}});
         dispatch(getHome());
     });
 }
